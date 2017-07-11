@@ -1,0 +1,75 @@
+/* pages/collect/collect.wxss */
+/*店铺*/
+page,.pages{
+  width: 100%;
+  height: 100%;
+  background: #efefef;
+}
+view{  
+    box-sizing: border-box;  
+}
+.shopCont{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  
+  padding: 10rpx 15rpx;
+  background: #fff;
+}
+.shopleft image{
+  width: 185rpx;
+}
+.shopRight{
+  margin-left: 35rpx;
+}
+.shopsite{
+  font-size: 24rpx;
+  color: #666666;
+}
+.shopselect{
+  display: -webkit-inline-flex;
+  display: flex;
+  margin: 25rpx 0;
+   font-size: 24rpx;
+}
+.select{
+  color: #fff;
+  padding: 5rpx 10rpx;
+  border-radius: 8rpx;
+
+}
+.onOpen{
+  background: #22ac38;
+}
+/*店铺End*/
+/*删除*/
+.collect{  
+    position: relative;  
+    border-top: 2rpx solid #eee;  
+    height: 220rpx;
+    margin-top: 20rpx;
+    overflow: hidden;  
+}
+.inner{  
+    position: absolute;  
+    top:0;  
+}  
+.inner.txt{  
+    background-color: #fff;  
+    width: 100%;  
+    z-index: 5;   
+    transition: left 0.2s ease-in-out;  
+    white-space:nowrap;  
+    overflow:hidden;  
+    text-overflow:ellipsis;  
+}
+.inner.del{  
+    background-color: #e64340;  
+    width: 180rpx;
+    text-align: center;  
+    height: 210rpx;
+    line-height: 210rpx;
+    z-index: 4;  
+    right: 0;  
+    color: #fff  
+}  

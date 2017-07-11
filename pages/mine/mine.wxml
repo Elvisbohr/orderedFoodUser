@@ -1,0 +1,12 @@
+<!--pages/mine/mine.wxml-->
+<view class="pages">
+  <view class="mineHead">
+    <view class="mineTx">
+      <image src="{{userInfo.avatarUrl}}"></image>
+    </view>
+    <view class="mineName">{{userInfo.nickName}}</view>
+    <navigator class="minexx" url="">个人信息 ></navigator>
+    
+  </view>
+  <image  class="mineBj" src="../../images/grbj.png"></image>
+</view>

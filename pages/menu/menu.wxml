@@ -1,0 +1,205 @@
+<!--pages/menu/menu.wxml-->
+<view class="pages pageCon">
+  <view class="pageTop">
+    <!--商铺头部-->
+    <view class="menuHead">
+      <view class="menuHleft">
+        <image class="menuImg" mode="widthFix" src="../../images/shopmode.png"></image>
+        <view class="menuName">黄焖鸡(华宇广场店)</view>
+      </view>
+      <image wx:if="{{attention==0}}" bindtap="attention" class="menuHright" mode="widthFix" src="../../images/attention.png"></image>
+      <image wx:if="{{attention==1}}" bindtap="attention" class="menuHright" mode="widthFix" src="../../images/attentionT.png"></image>
+    </view>
+    <!--商铺头部End-->
+    <!--优惠活动-->
+    <view class="privilege">
+      <!--代金券-->
+      <!--<view class="chit sImg">
+        <image mode="widthFix" src="../../images/djq.png"></image>
+        <view class="chitCont">
+          代金券:{{chit}}
+        </view>
+      </view>-->
+      <!--满减-->
+      <!--<view class="manjian sImg">
+        <image mode="widthFix" src="../../images/mj.png"></image>
+        <view class="mjCont">
+          {{manjian}}
+        </view>
+      </view>-->
+      <!--温馨提示-->
+      <view class="prompt sImg">
+        <image mode="widthFix" src="../../images/tishi.png"></image>
+        <view class="promptCont">用餐高峰请提前点餐，谢谢！</view>
+      </view>
+    </view>
+    <!--优惠活动End-->
+  </view>
+  <view class="pageBottom">
+    <!--Tab选项卡End-->
+    <view class="menuTab">
+      <view class="weui-navbar">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+          <view id="{{index}}" class="menutHead {{activeIndex == index ? 'onTach' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+
+      </view>
+      <view class="menuTabPanel" style="height:{{menuhieght}}px;">
+        <!--点餐页-->
+        <view class="index" hidden="{{activeIndex != 0}}">
+
+
+          <view hidden="{{!cartTab}}" class="cart-tab-wrp">
+            <view class="cart-item-total cart-tab-item">
+              <view class="cart-items">
+                <view class="cart-item-icon-wrp">
+                  <image class="cart-item-icon" src="../../images/orderBox.png" />
+                  <text hidden="{{total.count}}" class="cart-item-total-num bc_red">{{total.count}}</text>
+                </view>
+              </view>
+              <text class="cart-item-total-price">￥{{total.money}}</text>
+              <text class="cart-item-yh-price">优惠前价格￥{{total.money}}</text>
+            </view>
+            <view class="cart-tab-item">
+              <navigator url="../fail/fail?title=navigate" open-type="navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</navigator>
+            </view>
+          </view>
+          <view class="menu-wrp">
+            <scroll-view scroll-y="true" class="left-side">
+              <!--菜单列表-->
+              <block wx:for="{{menus}}" wx:key="id" wx:for-item="menu">
+                <view class="menu-item {{menu.curClass}}" data-id="{{index}}" data-tag="{{menu.tag}}" bindtap="selectMenu">
+                  <view class="menu-item-wrp">
+
+                    <view>
+                      <text class="m-item-title">{{menu.name}}</text>
+                    </view>
+                  </view>
+                </view>
+              </block>
+              <view class="menu-footer"></view>
+            </scroll-view>
+            <scroll-view scroll-y="true" scroll-into-view="{{toView}}" class="right-side">
+              <view class="dish-header"></view>
+              <block wx:for="{{menus[selectedMenuId].dishs}}" wx:key="id" wx:for-item="menu">
+                <view>
+
+                  <view class="dish-item">
+                    <view class="dish-item-wrp">
+                      <view class="dish-item-right">
+                        <view class="dish-item-pic">
+                          <!--商家图片-->
+                          <image class="image" src="../../images/{{menu.pic}}" />
+                        </view>
+                        <view class="dish-item-info" style="">
+                          <view>
+                            <text class="dish-item-name">{{menu.name}}</text>
+                          </view>
+                          <view>
+                            <text class="dish-item-money">
+                              <text class="yyuan">¥</text> {{menu.money}}</text>
+                          </view>
+                        </view>
+                      </view>
+                      <view class="dish-item-count" style="">
+                        <view class="dish-item-tab">
+                          <view hidden="{{menu.count == 0}}" class="dish-item-count-minus" data-id="{{menu.id}}" data-cid="{{menu.id}}" bindtap="minusCount">
+                            <image class="image" src="../../images/countMinus.png" />
+                          </view>
+                        </view>
+                        <view class="dish-item-count-text dish-item-tab">
+                          <text hidden="{{menu.count == 0}}">{{menu.count}}</text>
+                        </view>
+                        <view class="dish-item-count-plus" data-id="{{menu.id}}" data-cid="{{menu.id}}" bindtap="addCount">
+                          <image class="image" src="../../images/countSelAdd.png" />
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <!--</block>-->
+
+                </view>
+              </block>
+              <view class="dish-footer"></view>
+            </scroll-view>
+          </view>
+
+
+        </view>
+        <!--点餐页End-->
+        <!--商家页-->
+        <view class="" hidden="{{activeIndex != 1}}">
+          <view class="shopIndex">
+            <!--商铺介绍-->
+            <view class="shopList1">
+              <view class="shopjs">
+                <image mode="widthFix" src="../../images/jeishao.png"></image>
+
+              </view>
+              <view class="shopjsc {{jieshao?'':'on'}}" bindtap="jiesao">
+                <text>
+                  店铺介绍: 意思这不显示全下拉在显示?意思这不显示全下拉在显示?意思这不显示全下拉在显示?
+                </text>
+                <image mode="widthFix" src="../../images/xjt.png"></image>
+              </view>
+            </view>
+            <!--商铺介绍End-->
+            <!--营业时间-->
+            <view class="shopList1">
+              <view class="shopjs">
+                <image mode="widthFix" src="../../images/shijian.png"></image>
+
+              </view>
+              <view class="shopjsc">
+                {{opentime}}
+              </view>
+            </view>
+            <!--营业时间End-->
+            <!--店铺地址-->
+            <view class="shopList1">
+              <view class="shopjs">
+                <image mode="widthFix" src="../../images/dizhi.png"></image>
+
+              </view>
+              <view class="shopjsc">
+                {{shopsite}}
+              </view>
+            </view>
+            <!--店铺地址End-->
+            <!--店铺电话-->
+            <view class="shopList1">
+              <view class="shopjs">
+                <image mode="widthFix" src="../../images/dianhua.png"></image>
+              </view>
+              <view class="shopjsc">
+                {{shopPhone}}
+              </view>
+            </view>
+            <!--店铺电话End-->
+            <!--商家资质-->
+            <view class="shopapt">
+              <view class="aptTit">商家资质</view>
+              <view class="shopList1">
+                <view class="shopjs">
+                  <image mode="widthFix" src="../../images/zheng.png"></image>
+                </view>
+                <view class="shopjsc">
+                  资质照片
+                </view>
+              </view>
+              <view class="patImg">
+              <image class="psimg" src="../../images/shopmode.png"></image>
+              <image class="psimg pl" src="../../images/shopmode.png"></image>
+              </view>
+            </view>
+            <!--商家资质End-->            
+          </view>
+        </view>
+        <!--商家页End-->
+      </view>
+    </view>
+    <!--Tab选项卡-->
+  </view>
+</view>

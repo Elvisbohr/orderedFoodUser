@@ -1,0 +1,21 @@
+<!--pages/collect/collect.wxml-->
+<view class="pages">
+  <view wx:for="{{list}}" wx:key="{{index}}" class="collect">
+    <view url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+      <view class="shopleft">
+        <image mode="widthFix" src="../../images/shopmode.png"></image>
+      </view>
+      <view class="shopRight">
+        <view class="shopname">{{item.name}}</view>
+        <view class="shopselect">
+          <view class="select onOpen">{{item.sect}}</view>
+        </view>
+        <view class="shopsite">
+          <text>{{item.forms}}</text>
+          <text>{{item.jl}}km</text>
+        </view>
+      </view>
+    </view>
+    <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
+  </view>
+</view>
