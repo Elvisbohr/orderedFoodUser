@@ -49,3 +49,33 @@ page,.pages{
   font-size: 28rpx;
   margin-top: 14rpx;
 }
+.mineList{
+  height: 80rpx;
+  margin-bottom: 15rpx;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  background: #fff;
+}
+.mineMsg{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+.mineMsgImg{
+  width: 54rpx;
+  /* height: 55rpx; */
+  display: -webkit-flex;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  margin-right: 10rpx;
+}
+.mineMsgTxt{
+  color: #666666;
+}
+.mineRimg{
+  width: 26rpx;
+}

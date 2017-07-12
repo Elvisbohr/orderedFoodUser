@@ -21,8 +21,10 @@
     <image class="actr" mode="widthFix" src="../../images/xiaj.png"></image>
   </view>
   <view class="total">
-    <view class="">合计:</view>
+  <view class="totalL">
+    <view class="ml10">合计:</view>
     <view class="">优惠:</view>
+  </view>
     <view class="">实付:¥</view>
   </view>
   <!--优惠活动End-->

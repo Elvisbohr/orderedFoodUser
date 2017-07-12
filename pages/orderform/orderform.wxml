@@ -1,0 +1,19 @@
+<!--pages/orderform/orderform.wxml-->
+<view class="pages">
+  <block>
+  <navigator url="../orderparticulars/orderparticulars" class="orderList">
+    <view class="orderLeft">
+      <image class="shopImg" src="../../images/shopmode.png"></image>
+      <view class="orderShop">
+        <view class="shopName">凯宾斯基</view>
+        <view class="shopTime">点餐时间:2011-1-1 11:11</view>
+        <view class="shopMoney">总价:111</view>
+      </view>
+    </view>
+    <view class="orderRight">
+      <view class="orderSelect {{ordertype}}">待接单</view>
+      <view class="orderMore" hidden="{{order !=2}}">再来一单</view>
+    </view>
+  </navigator>
+  </block>
+</view>

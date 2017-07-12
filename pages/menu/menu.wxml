@@ -51,7 +51,7 @@
         <view class="index" hidden="{{activeIndex != 0}}">
 
 
-          <view hidden="{{!cartTab}}" class="cart-tab-wrp">
+          <view hidden="{{cartTab}}" class="cart-tab-wrp">
             <view class="cart-item-total cart-tab-item">
               <view class="cart-items">
                 <view class="cart-item-icon-wrp">
@@ -63,7 +63,7 @@
               <text class="cart-item-yh-price">优惠前价格￥{{total.money}}</text>
             </view>
             <view class="cart-tab-item">
-              <navigator url="../fail/fail?title=navigate" open-type="navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</navigator>
+              <navigator url="../settle/settle?title=navigate" open-type="navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</navigator>
             </view>
           </view>
           <view class="menu-wrp">

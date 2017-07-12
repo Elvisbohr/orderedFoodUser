@@ -35,6 +35,18 @@ page,.pages{
   align-items: center;
   position: relative;
   background: #fff;
+  padding-top: 110rpx;
+}
+.foodbz{
+  width:35%;
+  flex-shrink:0;
+}
+.totalL{
+  display: -webkit-flex;
+  display: flex;
+}
+.ml10{
+  margin-right: 20rpx;
 }
 .actl{
   font-size: 24rpx;

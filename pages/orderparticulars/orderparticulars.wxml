@@ -1,0 +1,92 @@
+<!--pages/orderparticulars/orderparticulars.wxml-->
+<view class="pages">
+  <!-- 头部 -->
+  <view class="orderhead">
+    <!-- 订单号 -->
+    <view class="rowNum">
+      <view class="qcNum">23</view>
+      <image class="phImg" src="../../images/paihao.png"></image>
+    </view>
+    <!-- 横线 -->
+    <view class="heng"></view>
+    <!-- 订单状态 -->
+    <view class="numType">
+      <view class="partType">待接单</view>
+      <view class="partNum">堂食 <text>00桌</text></view>
+    </view>
+  </view>
+  <!-- 取餐时间 -->
+  <view class="partList">
+
+    <view class="partL">
+      <view class="partLi">取餐时间: </view>
+      <view class=""> 2017-01-01 11:11</view>
+    </view>
+  </view>
+  <!-- 取餐地址 -->
+  <view class="partList">
+    <view class="partL">
+      <view class="partLi">取餐地址: </view>
+      <view class="partDz"> 太原市清控创新基地D座3层0310室太原市清控创新基地D座3层0310室太原市清控创新基地D座3层0310室</view>
+    </view>
+    <image class="partR" mode="widthFix" src="../../images/rjt.png"></image>
+  </view>
+  <!-- 联系商家 -->
+  <view class="partList" bindtap="call">
+    <view class="partL">
+      <view class="partLi">联系商家: </view>
+      <view class=""> 130999999999</view>
+    </view>
+    <image class="partR" mode="widthFix" src="../../images/rjt.png"></image>
+  </view>
+  <!-- 菜品详情 -->
+  <!--店铺名-->
+  <view class="settleHead">
+    凯宾斯基
+  </view>
+  <!--店铺名End-->
+  <!--已选菜品-->
+  <view class="foodCont {{upmore?'':'on'}}">
+  <block>
+    <view class="foodList">
+      <view class="foodname">麻婆豆腐</view>
+      <view class="foodbz"></view>
+      <view class="foodpart">X1</view>
+      <view class="foodmoney">¥12</view>
+    </view>
+    <view class="foodList">
+      <view class="foodname">麻婆豆腐</view>
+      <view class="foodbz"></view>
+      <view class="foodpart">X1</view>
+      <view class="foodmoney">¥12</view>
+    </view>
+    <view class="foodList">
+      <view class="foodname">麻婆豆腐</view>
+      <view class="foodbz"></view>
+      <view class="foodpart">X1</view>
+      <view class="foodmoney">¥12</view>
+    </view>
+  </block>
+  </view>
+  <!--已选菜品End-->
+  <!--优惠活动-->
+  <view class="activity">
+    <view class="actl">优惠活动:</view>
+    <image bindtap="upmore" class="actr" mode="widthFix" src="../../images/xiaj.png"></image>
+  </view>
+  <view class="total">
+    <view class="totalL">
+      <view class="ml10">合计:110</view>
+      <view class="">优惠:500</view>
+    </view>
+    <view class="">实付:¥110</view>
+  </view>
+  <!--优惠活动End-->
+   <!-- 备注 -->
+  <view class="bz">
+    <view class="bzL">
+      备注:
+    </view>
+    <view class="bzR"></view>
+  </view>
+</view>

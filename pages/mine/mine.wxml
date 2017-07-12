@@ -1,12 +1,40 @@
 <!--pages/mine/mine.wxml-->
 <view class="pages">
+  <!-- 头部 -->
   <view class="mineHead">
     <view class="mineTx">
       <image src="{{userInfo.avatarUrl}}"></image>
     </view>
     <view class="mineName">{{userInfo.nickName}}</view>
     <navigator class="minexx" url="">个人信息 ></navigator>
-    
   </view>
-  <image  class="mineBj" src="../../images/grbj.png"></image>
+  <image class="mineBj" src="../../images/grbj.png"></image>
+  <!-- 头部 -->
+  <!-- 我的订单 -->
+  <navigator class="mineList" url="../orderform/orderform">
+    <view class="mineMsg">
+      <image class="mineMsgImg" mode="widthFix" src="../../images/ddan.png"></image>
+      <text class="mineMsgTxt">我的订单</text>
+    </view>
+    <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
+  </navigator>
+  <!-- 我的订单End -->
+  <!-- 会员中心 -->
+  <navigator class="mineList" url="url">
+    <view class="mineMsg">
+      <image class="mineMsgImg" mode="widthFix" src="../../images/huiy.png"></image>
+      <text class="mineMsgTxt">会员中心</text>
+    </view>
+    <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
+  </navigator>
+  <!-- 会员中心End -->
+  <!-- 协议与说明 -->
+  <navigator class="mineList" url="url">
+    <view class="mineMsg">
+      <image class="mineMsgImg" mode="widthFix" src="../../images/xy.png"></image>
+      <text class="mineMsgTxt">协议与说明</text>
+    </view>
+    <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
+  </navigator>
+  <!-- 协议与说明End -->
 </view>

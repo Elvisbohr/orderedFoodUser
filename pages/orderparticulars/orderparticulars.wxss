@@ -1,0 +1,172 @@
+/* pages/orderparticulars/orderparticulars.wxss */
+page,.pages{
+  height: 100%;
+  background: #efefef;
+}
+.orderhead{
+  width: 100%;
+  height: 80rpx;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:56rpx 0;
+  background: #fff;
+  border-bottom: 1px solid #d6d4d4;
+}
+.rowNum{
+  position: relative;
+  z-index: 99;
+  width: 126rpx;
+  height: 80rpx;
+}
+.qcNum{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+  font-size: 40rpx;
+  color: #fff;
+  transform: translate(-50%, -35%);
+}
+.phImg{
+  width: 126rpx;
+  height: 80rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+}
+.heng{
+  width: 1px;
+  height: 80rpx;
+  background: #808080;
+  margin: 0 24rpx;
+}
+.partType{
+  font-size: 32rpx;
+}
+.partNum{
+  font-size: 30rpx;
+  color: #808080;
+}
+.partList{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  padding: 26rpx 35rpx;
+  color: #808080;
+  background: #fff;
+  border-bottom: 1px solid #d6d4d4;  
+}
+.partL{
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.partLi{
+  flex-shrink:0;
+}
+.partDz{
+  width: 65%;
+}
+.partR{
+  width: 20rpx;
+  flex-shrink:0;
+}
+/*店铺名称*/
+.settleHead{
+  height: 85rpx;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  color: #808080;
+  padding-left: 35rpx;
+  font-size: 36rpx;
+  border-bottom: 1px solid #d6d4d4;
+  background: #fff;
+  margin-top: 36rpx;
+}
+/*已选菜品*/
+.foodCont{
+  height: 180rpx;
+  overflow: hidden;
+}
+.foodCont.on{
+  height: auto;
+}
+.foodList{
+  height: 90rpx;
+  font-size: 28rpx;
+  color: #454545;
+  padding:0 30rpx;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+}
+/*优惠活动*/
+.activity{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: #fff;
+  padding-top: 36rpx;
+}
+.actl{
+  font-size: 24rpx;
+  color: #454545;
+  height: 55rpx;
+  width: 90%;
+  padding-left: 30rpx;
+  border-bottom: 1px solid #f1f1f1;
+}
+.foodbz{
+  width:35%;
+  flex-shrink:0;
+}
+.totalL{
+  display: -webkit-flex;
+  display: flex;
+}
+.ml10{
+  margin-right: 20rpx;
+}
+.actr{
+  width: 22rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: -10rpx
+}
+.total{
+  height: 80rpx;
+  font-size: 28rpx;
+  padding: 0 30rpx;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+/* 备注 */
+.bz{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  font-size: 28rpx;
+  padding: 20rpx 30rpx;
+  margin-top: 30rpx;
+  color:#808080;
+}
+.bzL{
+  flex-shrink:0;
+}
+.bzR{
+  width: 80%;
+  margin-left: 30rpx;
+}

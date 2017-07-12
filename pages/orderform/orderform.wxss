@@ -1,0 +1,63 @@
+/* pages/orderform/orderform.wxss */
+page,.pages{
+  height: 100%;
+  background: #efefef;
+}
+.orderList{
+  display: -webkit-flex;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  background: #fff;
+  overflow: hidden;
+  padding: 40rpx 30rpx 48rpx;
+  margin-bottom: 10rpx;
+}
+.orderLeft{
+  display: -webkit-flex;
+  display: flex;
+  /* align-items: center; */
+}
+.shopImg{
+  width: 80rpx;
+  height: 80rpx;
+  padding-right: 30rpx;
+}
+
+.shopName{
+  font-size: 28rpx;
+  color: #252525;
+}
+.shopTime,.shopMoney{
+  font-size: 24rpx;
+  color: #666666;
+}
+.shopTime{
+  padding: 20rpx 0;
+}
+.orderSelect{
+  font-size: 28rpx;
+  padding: 5rpx 10rpx; 
+}
+.orderSelect.jd{
+  background: #e23237;
+  border-radius: 4px;
+  color: #fff;
+}
+.orderSelect.qc{
+  background: #f39800;
+  border-radius: 4px;
+  color: #fff;
+}
+.orderSelect.wc{
+  color: #8a8a8a;
+}
+.orderRight{
+  font-size: 24rpx;
+}
+.orderMore{
+  border:1px solid #ff9e36;
+  border-radius: 4px;
+  color: #ff9e36;
+  padding: 5rpx 10rpx; 
+}
