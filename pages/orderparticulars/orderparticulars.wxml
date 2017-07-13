@@ -3,9 +3,16 @@
   <!-- 头部 -->
   <view class="orderhead">
     <!-- 订单号 -->
-    <view class="rowNum">
+    <!-- <view class="rowNum">
       <view class="qcNum">23</view>
       <image class="phImg" src="../../images/paihao.png"></image>
+    </view> -->
+    <view class="orderNum">
+      <image class="jv" src="../../images/dao.png"></image>
+      <view class="partyuan">
+       23
+      </view>
+      <image class="jv" src="../../images/cha.png"></image>
     </view>
     <!-- 横线 -->
     <view class="heng"></view>

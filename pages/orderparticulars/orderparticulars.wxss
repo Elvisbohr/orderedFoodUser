@@ -50,6 +50,39 @@ page,.pages{
   font-size: 30rpx;
   color: #808080;
 }
+/* 排号 */
+.orderNum{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+.jv{
+  width: 26rpx;
+  height: 80rpx;
+}
+.partyuan{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: #eb3444;
+  color: #fff;
+}
+.partyuan:before{
+  content: "";
+  position: absolute;
+  top: 6rpx;
+  left: 6rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 60px;
+
+  border:4rpx solid #fff;
+}
 .partList{
   display: -webkit-flex;
   display: flex;

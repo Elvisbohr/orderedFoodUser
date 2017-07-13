@@ -1,0 +1,31 @@
+<!--pages/details/details.wxml-->
+<view class="pages">
+  <view class="List bm">
+    <view class="listL">头像</view>
+    <view class="listR">
+      <image class="userImg" bindtap="UpuserImg" src="{{userInfo.userImg}}"></image>
+      <image class="rjt" mode="widthFix" src="../../images/rjt.png"></image>
+    </view>
+  </view>
+  <navigator url="../userName/userName" class="List bm">
+    <view class="listL">用户名</view>
+    <view class="listR">
+      <view class="userName">{{userInfo.userName}}</view>
+      <image class="rjt" mode="widthFix" src="../../images/rjt.png"></image>
+    </view>
+  </navigator>
+  <navigator url="../userBirthday/userBirthday" class="List bm">
+    <view class="listL">生日</view>
+    <view class="listR">
+      <view class="userBirthday">{{userInfo.userBirthday}}</view>
+      <image class="rjt" mode="widthFix" src="../../images/rjt.png"></image>
+    </view>
+  </navigator>
+  <navigator url="../userPhone/userPhone" class="List bm">
+    <view class="listL">手机号</view>
+    <view class="listR">
+      <view class="userPhone">{{userInfo.userPhone}}</view>
+      <image class="rjt" mode="widthFix" src="../../images/rjt.png"></image>
+    </view>
+  </navigator>
+</view>

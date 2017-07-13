@@ -8,3 +8,12 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.List{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  padding: 26rpx 30rpx;
+  background: #fff;
+  
+}
