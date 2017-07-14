@@ -1,6 +1,7 @@
 // pages/settle/settle.js
 Page({
    data: {
+     upmore: true,    //查看全部已点餐品
      shopname:'天一阁',  //店铺名
      circle: false,   //就餐方式
      cirImg: true,    //就餐方式
@@ -22,6 +23,13 @@ Page({
     console.log("当前时间：" +h+":"+m);  
     that.setData({
       time : h + ":" + m,
+    })
+  },
+  // 查看全部已点菜品
+  upmore: function () {
+    var that = this;
+    that.setData({
+      upmore: (!that.data.upmore)
     })
   },
   // 就餐方式

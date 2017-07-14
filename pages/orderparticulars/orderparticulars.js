@@ -1,7 +1,7 @@
 // pages/orderparticulars/orderparticulars.js
 Page({
   data: {
-    upmore:true,
+    upmore:true,    //查看全部已点餐品
   },
 
   onLoad: function (options) {

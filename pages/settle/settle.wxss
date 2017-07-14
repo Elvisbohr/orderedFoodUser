@@ -16,6 +16,13 @@ page,.pages{
   background: #fff;
 }
 /*已选菜品*/
+.foodCont{
+  height: 180rpx;
+  overflow: hidden;
+}
+.foodCont.on{
+  height: auto;
+}
 .foodList{
   height: 90rpx;
   font-size: 28rpx;
@@ -35,7 +42,7 @@ page,.pages{
   align-items: center;
   position: relative;
   background: #fff;
-  padding-top: 110rpx;
+  padding-top: 36rpx;
 }
 .foodbz{
   width:35%;

@@ -1,14 +1,14 @@
 {
-  "pages":["pages/userName/userName",
+  "pages":["pages/menu/menu",
     "pages/index/index",
     "pages/mine/mine",
-    "pages/menu/menu",
+    
     "pages/settle/settle",
     "pages/collect/collect",
     "pages/orderform/orderform",
     "pages/orderparticulars/orderparticulars",
     "pages/details/details",
-    
+    "pages/userName/userName",
     "pages/userBirthday/userBirthday",
     "pages/userPhone/userPhone",
     "pages/switchcity/switchcity",

@@ -6,7 +6,7 @@
       <image src="{{userInfo.avatarUrl}}"></image>
     </view>
     <view class="mineName">{{userInfo.nickName}}</view>
-    <navigator class="minexx" url="">个人信息 ></navigator>
+    <navigator class="minexx" url="../details/details">个人信息 ></navigator>
   </view>
   <image class="mineBj" src="../../images/grbj.png"></image>
   <!-- 头部 -->

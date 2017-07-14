@@ -12,55 +12,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    console.log(options.userBirthday)
+    // 获取用户生日如果没有显示文字
+    if (options.userBirthday == ""){
+      console.log('未设置生日')
+      that.setData({
+        userBirthday: '请设置您的生日',
+      })
+    }else{
+      that.setData({
+        userBirthday: options.userBirthday,
+      })
+    }
+   
+  },
+  // 设置生日加入接口
+  bindBirthday: function (e) {
+    this.setData({
+      userBirthday: e.detail.value
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

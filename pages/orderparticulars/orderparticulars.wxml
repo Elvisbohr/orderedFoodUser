@@ -1,12 +1,9 @@
 <!--pages/orderparticulars/orderparticulars.wxml-->
 <view class="pages">
+  <!-- 顶部提示 -->
+  <view class="tips">如您下单10分钟内商家没有接单，则该订单自动被取消</view>
   <!-- 头部 -->
   <view class="orderhead">
-    <!-- 订单号 -->
-    <!-- <view class="rowNum">
-      <view class="qcNum">23</view>
-      <image class="phImg" src="../../images/paihao.png"></image>
-    </view> -->
     <view class="orderNum">
       <image class="jv" src="../../images/dao.png"></image>
       <view class="partyuan">
@@ -56,23 +53,23 @@
   <view class="foodCont {{upmore?'':'on'}}">
   <block>
     <view class="foodList">
-      <view class="foodname">麻婆豆腐</view>
+      <view class="foodname">麻婆豆腐1</view>
+      <view class="foodbz"></view>
+      <view class="foodpart">X1</view>
+      <view class="foodmoney">¥12</view>
+    </view>
+     <view class="foodList">
+      <view class="foodname">麻婆豆腐2</view>
       <view class="foodbz"></view>
       <view class="foodpart">X1</view>
       <view class="foodmoney">¥12</view>
     </view>
     <view class="foodList">
-      <view class="foodname">麻婆豆腐</view>
+      <view class="foodname">麻婆豆腐3</view>
       <view class="foodbz"></view>
       <view class="foodpart">X1</view>
       <view class="foodmoney">¥12</view>
-    </view>
-    <view class="foodList">
-      <view class="foodname">麻婆豆腐</view>
-      <view class="foodbz"></view>
-      <view class="foodpart">X1</view>
-      <view class="foodmoney">¥12</view>
-    </view>
+    </view> 
   </block>
   </view>
   <!--已选菜品End-->

@@ -6,19 +6,33 @@
   </view>
   <!--头部End-->
   <!--已选菜品-->
+  <view class="foodCont {{upmore?'':'on'}}">
   <block>
     <view class="foodList">
       <view class="foodname">麻婆豆腐</view>
-      <view class="foodbz">(加辣)(特大)</view>
+      <view class="foodbz"></view>
+      <view class="foodpart">1</view>
+      <view class="foodmoney">¥12</view>
+    </view>
+    <view class="foodList">
+      <view class="foodname">麻婆豆腐</view>
+      <view class="foodbz"></view>
+      <view class="foodpart">1</view>
+      <view class="foodmoney">¥12</view>
+    </view>
+    <view class="foodList">
+      <view class="foodname">麻婆豆腐</view>
+      <view class="foodbz">大)</view>
       <view class="foodpart">1</view>
       <view class="foodmoney">¥12</view>
     </view>
   </block>
+  </view>
   <!--已选菜品End-->
   <!--优惠活动-->
   <view class="activity">
     <view class="actl">优惠活动:</view>
-    <image class="actr" mode="widthFix" src="../../images/xiaj.png"></image>
+    <image bindtap="upmore" class="actr" mode="widthFix" src="../../images/xiaj.png"></image>
   </view>
   <view class="total">
   <view class="totalL">

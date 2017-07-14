@@ -13,6 +13,9 @@ page,.pages{
   align-items: center;
   font-size: 32rpx;
 }
+.listL text{
+  margin-right: 20rpx;
+}
 .tips{
   font-size: 24rpx;
   padding: 40rpx 30rpx 0;

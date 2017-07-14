@@ -12,25 +12,32 @@
     </view>
     <!--商铺头部End-->
     <!--优惠活动-->
-    <view class="privilege">
-      <!--代金券-->
-      <!--<view class="chit sImg">
+    <view class="privilege" wx:if="{{privilege}}">
+
+      <view class="chit sImg">
         <image mode="widthFix" src="../../images/djq.png"></image>
         <view class="chitCont">
           代金券:{{chit}}
         </view>
-      </view>-->
-      <!--满减-->
-      <!--<view class="manjian sImg">
+      </view>
+
+      <view class="manjian sImg">
         <image mode="widthFix" src="../../images/mj.png"></image>
         <view class="mjCont">
           {{manjian}}
         </view>
-      </view>-->
-      <!--温馨提示-->
-      <view class="prompt sImg">
+      </view>
+
+    </view>
+    <!--温馨提示-->
+    <view class="Lists">
+      <view class="sImg">
         <image mode="widthFix" src="../../images/tishi.png"></image>
         <view class="promptCont">用餐高峰请提前点餐，谢谢！</view>
+      </view>
+      <view bindtap="prompt" class="sImg">
+        <view class="promptCont">{{promptNum}}种优惠</view>
+        <image mode="widthFix" src="../../images/xiaj.png"></image>
       </view>
     </view>
     <!--优惠活动End-->
@@ -138,10 +145,10 @@
                 <image mode="widthFix" src="../../images/jeishao.png"></image>
 
               </view>
-              <view class="shopjsc {{jieshao?'':'on'}}" bindtap="jiesao">
-                <text>
+              <view class="shopjsc" bindtap="jiesao">
+                <view class="spjs {{jieshao?'':'on'}}">
                   店铺介绍: 意思这不显示全下拉在显示?意思这不显示全下拉在显示?意思这不显示全下拉在显示?
-                </text>
+                </view>
                 <image mode="widthFix" src="../../images/xjt.png"></image>
               </view>
             </view>
@@ -190,11 +197,11 @@
                 </view>
               </view>
               <view class="patImg">
-              <image class="psimg" src="../../images/shopmode.png"></image>
-              <image class="psimg pl" src="../../images/shopmode.png"></image>
+                <image bindtap="patImg" class="psimg" src="../../images/shopmode.png"></image>
+                <image class="psimg pl" src="../../images/shopmode.png"></image>
               </view>
             </view>
-            <!--商家资质End-->            
+            <!--商家资质End-->
           </view>
         </view>
         <!--商家页End-->

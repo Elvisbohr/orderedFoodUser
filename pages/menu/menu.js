@@ -13,7 +13,7 @@ Page({
     opentime:'10:00-12:00', //商铺营业时间
     shopPhone:'130xxxxxxxx',  //商铺电话
     shopsite:'中南海sadasd',   //商铺地址
-
+    privilege:false,    //商铺活动
     indicatorDots: true,
     vertical: false,
     autoplay: false,
@@ -58,11 +58,26 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          menuhieght: res.windowHeight - 124,
+          menuhieght: res.windowHeight - 134,
         });
         console.log(that.data.menuhieght)
       }
     });
+  },
+  // 点击显示全图
+  patImg:function(e){
+    wx.previewImage({
+      current: '', // 当前显示图片的http链接
+      urls: [] // 需要预览的图片http链接列表
+    })
+
+  },
+  //显示全部优惠活动
+  prompt:function(){
+    var that = this;
+    that.setData({
+      privilege: (!that.data.privilege),
+    })
   },
   // 点击事件Tab
   tabClick: function (e) {
