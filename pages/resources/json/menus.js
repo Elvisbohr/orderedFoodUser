@@ -5,7 +5,7 @@ export default [
         name:'招牌',
         icon:'',
         curClass:"on",
-        dishs:[
+        list:[
           {
             id:11,
             money:89,
