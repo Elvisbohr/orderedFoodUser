@@ -33,7 +33,7 @@
       <view class="partLi">取餐地址: </view>
       <view class="partDz"> 太原市清控创新基地D座3层0310室太原市清控创新基地D座3层0310室太原市清控创新基地D座3层0310室</view>
     </view>
-    <image class="partR" mode="widthFix" src="../../images/rjt.png"></image>
+    <!-- <image class="partR" mode="widthFix" src="../../images/rjt.png"></image> -->
   </view>
   <!-- 联系商家 -->
   <view class="partList" bindtap="call">

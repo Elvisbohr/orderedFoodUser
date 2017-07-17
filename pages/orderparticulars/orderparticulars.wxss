@@ -129,7 +129,7 @@ page,.pages{
 }
 /*已选菜品*/
 .foodCont{
-  max-height: 180rpx;
+  height: 180rpx;
   overflow: hidden;
 }
 .foodCont.on{

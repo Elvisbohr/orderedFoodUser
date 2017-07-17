@@ -27,8 +27,9 @@
   <!--轮播图End-->
   <!--店铺展示-->
   <block>
-    <scroll-view scroll-x style="width:100;height:{{mainHieght}};">
-    <navigator url="../menu/menu" class="shopCont">
+    <scroll-view scroll-y style="width:100%;height:{{mainHieght}}px;">
+    
+    <navigator url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
       <view class="shopleft">
         <image mode="widthFix" src="../../images/shopmode.png"></image>
       </view>
@@ -38,11 +39,71 @@
           <view class="select onOpen">营业中</view>
         </view>
         <view class="shopsite">
-          <text>店铺地址</text><text>XXkm</text>
+          <text>店铺地址</text>
+          <text>XXkm</text>
         </view>
-      </view>   
+      </view>
     </navigator>
-
+    <navigator url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+      <view class="shopleft">
+        <image mode="widthFix" src="../../images/shopmode.png"></image>
+      </view>
+      <view class="shopRight">
+        <view class="shopname">店铺名称</view>
+        <view class="shopselect">
+          <view class="select onOpen">营业中</view>
+        </view>
+        <view class="shopsite">
+          <text>店铺地址</text>
+          <text>XXkm</text>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+      <view class="shopleft">
+        <image mode="widthFix" src="../../images/shopmode.png"></image>
+      </view>
+      <view class="shopRight">
+        <view class="shopname">店铺名称</view>
+        <view class="shopselect">
+          <view class="select onOpen">营业中</view>
+        </view>
+        <view class="shopsite">
+          <text>店铺地址</text>
+          <text>XXkm</text>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+      <view class="shopleft">
+        <image mode="widthFix" src="../../images/shopmode.png"></image>
+      </view>
+      <view class="shopRight">
+        <view class="shopname">店铺名称</view>
+        <view class="shopselect">
+          <view class="select onOpen">营业中</view>
+        </view>
+        <view class="shopsite">
+          <text>店铺地址</text>
+          <text>XXkm</text>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+      <view class="shopleft">
+        <image mode="widthFix" src="../../images/shopmode.png"></image>
+      </view>
+      <view class="shopRight">
+        <view class="shopname">店铺名称</view>
+        <view class="shopselect">
+          <view class="select onOpen">营业中</view>
+        </view>
+        <view class="shopsite">
+          <text>店铺地址</text>
+          <text>XXkm</text>
+        </view>
+      </view>
+    </navigator>
      </scroll-view>
   </block>
   <!--店铺展示End-->

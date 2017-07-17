@@ -165,14 +165,17 @@
             </view>
             <!--营业时间End-->
             <!--店铺地址-->
-            <view class="shopList1">
-              <view class="shopjs">
-                <image mode="widthFix" src="../../images/dizhi.png"></image>
-
+            <view class="shopList1 fb" bindtap="shopmap">
+              <view class="">
+                <view class="shopjs">
+                  <image mode="widthFix" src="../../images/dizhi.png"></image>
+                </view>
+                <view class="shopjsc">
+                  {{shopsite}}
+                </view>
               </view>
-              <view class="shopjsc">
-                {{shopsite}}
-              </view>
+              <image class="partR" mode="widthFix" src="../../images/rjt.png"></image>
+              
             </view>
             <!--店铺地址End-->
             <!--店铺电话-->

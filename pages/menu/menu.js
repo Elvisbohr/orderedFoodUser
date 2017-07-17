@@ -238,10 +238,20 @@ Page({
       },
     })
   },
+  // 店铺介绍显示全部
   jiesao:function(){
     var that =this;
     that.setData({
       jieshao: (!that.data.jieshao)
     })
   },
+  // 跳转到地图页
+  shopmap:function(){
+    
+    wx.openLocation({
+      latitude: 23.099994,
+      longitude: 113.324520,
+      scale: 28
+    })
+  }
 })

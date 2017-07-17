@@ -510,3 +510,10 @@ z-index: 99;
 .psimg:last-of-type{
   padding-left: 30rpx;
 }
+.fb{
+  justify-content: space-between;
+}
+.partR{
+  width: 20rpx;
+  flex-shrink:0;
+}

@@ -59,9 +59,18 @@ Page({
   },
   onLoad: function (options) {
     console.log('onLoad')
-    var that = this
+    var that = this;
     console.log(options)
     that.getCoordinates(options);
-    
+     //获取手机信息(宽高等)
+    wx.getSystemInfo({ 
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          mainHieght: res.windowHeight - 250,
+        });
+        console.log(that.data.mainHieght)
+      }
+    });
   }
 })
