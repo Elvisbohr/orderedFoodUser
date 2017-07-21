@@ -73,7 +73,7 @@ view{
   padding: 18rpx 15rpx;
   background: #fff;
 }
-.shopleft image{
+.shopleft{
   width: 146rpx;
 }
 .shopRight{
@@ -100,5 +100,8 @@ view{
 }
 .onOpen{
   background: #22ac38;
+}
+.km{
+  padding-left: 16rpx; 
 }
 /*店铺End*/

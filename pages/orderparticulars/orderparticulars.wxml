@@ -5,11 +5,11 @@
   <!-- 头部 -->
   <view class="orderhead">
     <view class="orderNum">
-      <image class="jv" src="../../images/dao.png"></image>
+      <image class="jv" src="../../images/cha.png"></image>
       <view class="partyuan">
        23
       </view>
-      <image class="jv" src="../../images/cha.png"></image>
+      <image class="jv" src="../../images/dao.png"></image>
     </view>
     <!-- 横线 -->
     <view class="heng"></view>
@@ -76,14 +76,14 @@
   <!--优惠活动-->
   <view class="activity">
     <view class="actl">优惠活动:</view>
-    <image bindtap="upmore" class="actr" mode="widthFix" src="../../images/xiaj.png"></image>
+    <image bindtap="upmore" class="actr {{upmore?'':'on'}}" mode="widthFix" src="../../images/xiaj.png"></image>
   </view>
   <view class="total">
     <view class="totalL">
       <view class="ml10">合计:110</view>
       <view class="">优惠:500</view>
     </view>
-    <view class="">实付:¥110</view>
+    <view class="sf">实付:¥110</view>
   </view>
   <!--优惠活动End-->
    <!-- 备注 -->

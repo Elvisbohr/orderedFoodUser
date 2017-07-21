@@ -2,6 +2,7 @@
 Page({
    data: {
      upmore: true,    //查看全部已点餐品
+     xl:false,      //下拉箭头
      shopname:'天一阁',  //店铺名
      circle: false,   //就餐方式
      cirImg: true,    //就餐方式
@@ -29,7 +30,7 @@ Page({
   upmore: function () {
     var that = this;
     that.setData({
-      upmore: (!that.data.upmore)
+      upmore: (!that.data.upmore),
     })
   },
   // 就餐方式

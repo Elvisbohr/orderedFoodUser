@@ -1,4 +1,4 @@
-<!--pages/menu/menu.wxml-->
+ <!--pages/menu/menu.wxml-->
 <view class="pages pageCon">
   <view class="pageTop">
     <!--商铺头部-->
@@ -32,12 +32,12 @@
     <!--温馨提示-->
     <view class="Lists">
       <view class="sImg">
-        <image mode="widthFix" src="../../images/tishi.png"></image>
+        <image class="simgs" mode="widthFix" src="../../images/tishi.png"></image>
         <view class="promptCont">用餐高峰请提前点餐，谢谢！</view>
       </view>
       <view bindtap="prompt" class="sImg">
         <view class="promptCont">{{promptNum}}种优惠</view>
-        <image mode="widthFix" src="../../images/xiaj.png"></image>
+        <image class="simgs {{xl?'on':''}}" mode="widthFix" src="../../images/xiaj.png"></image>
       </view>
     </view>
     <!--优惠活动End-->
@@ -191,12 +191,12 @@
             <!--商家资质-->
             <view class="shopapt">
               <view class="aptTit">商家资质</view>
-              <view class="shopList1">
+              <view class="shopList1 shopil">
                 <view class="shopjs">
                   <image mode="widthFix" src="../../images/zheng.png"></image>
                 </view>
                 <view class="shopjsc">
-                  资质照片
+                  资质证照
                 </view>
               </view>
               <view class="patImg">

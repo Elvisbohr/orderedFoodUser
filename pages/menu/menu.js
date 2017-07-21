@@ -14,6 +14,7 @@ Page({
     shopPhone:'130xxxxxxxx',  //商铺电话
     shopsite:'中南海sadasd',   //商铺地址
     privilege:false,    //商铺活动
+    xl:false,     //下拉显示全部活动
     indicatorDots: true,
     vertical: false,
     autoplay: false,
@@ -77,6 +78,7 @@ Page({
     var that = this;
     that.setData({
       privilege: (!that.data.privilege),
+      xl: (!that.data.xl),
     })
   },
   // 点击事件Tab

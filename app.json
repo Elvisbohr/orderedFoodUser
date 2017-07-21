@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/mine/mine",
+    "pages/member/member",
     "pages/menu/menu",
     "pages/settle/settle",
     "pages/collect/collect",
@@ -12,6 +13,8 @@
     "pages/userBirthday/userBirthday",
     "pages/userPhone/userPhone",
     "pages/switchcity/switchcity",
+    "pages/helpcentre/helpcentre",
+    "pages/agreement/agreement",
     "pages/logs/logs"
   ],
   "window":{

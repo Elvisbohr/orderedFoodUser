@@ -2,9 +2,9 @@
 <view class="pages">
    <view wx:for="{{list}}" wx:key="{{index}}" class="collect">
     <view url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
-      <view class="shopleft">
-        <image mode="widthFix" src="../../images/shopmode.png"></image>
-      </view>
+      <!-- <view> -->
+        <image class="shopleft" mode="widthFix" src="../../images/shopmode.png"></image>
+      <!-- </view> -->
       <view class="shopRight">
         <view class="shopname">{{item.name}}</view>
         <view class="shopselect">
@@ -12,7 +12,7 @@
         </view>
         <view class="shopsite">
           <text>{{item.forms}}</text>
-          <text>{{item.jl}}km</text>
+          <text class="km">{{item.jl}}km</text>
         </view>
       </view>
     </view>

@@ -16,8 +16,8 @@ view{
   padding: 10rpx 15rpx;
   background: #fff;
 }
-.shopleft image{
-  width: 185rpx;
+.shopleft{
+  width: 146rpx;
 }
 .shopRight{
   margin-left: 35rpx;
@@ -29,14 +29,16 @@ view{
 .shopselect{
   display: -webkit-inline-flex;
   display: flex;
-  margin: 25rpx 0;
+  margin: 16rpx 0;
    font-size: 24rpx;
 }
 .select{
   color: #fff;
   padding: 5rpx 10rpx;
   border-radius: 8rpx;
-
+}
+.shopname{
+  font-size: 30rpx;
 }
 .onOpen{
   background: #22ac38;
@@ -46,7 +48,7 @@ view{
 .collect{  
     position: relative;  
     border-top: 2rpx solid #eee;  
-    height: 220rpx;
+    height: 190rpx;
     margin-top: 20rpx;
     overflow: hidden;  
 }
@@ -67,8 +69,8 @@ view{
     background-color: #e64340;  
     width: 180rpx;
     text-align: center;  
-    height: 210rpx;
-    line-height: 210rpx;
+    height: 166rpx;
+    line-height: 166rpx;
     z-index: 4;  
     right: 0;  
     color: #fff  
@@ -90,4 +92,7 @@ view{
   margin-top: 35rpx;
   color: #c0c0c0;
   font-size: 32rpx;
+}
+.km{
+  padding-left: 16rpx; 
 }

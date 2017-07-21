@@ -122,7 +122,7 @@ page,.pages{
   align-items: center;
   color: #808080;
   padding-left: 35rpx;
-  font-size: 36rpx;
+  font-size: 32rpx;
   border-bottom: 1px solid #d6d4d4;
   background: #fff;
   margin-top: 36rpx;
@@ -181,6 +181,9 @@ page,.pages{
   right: 10rpx;
   bottom: -10rpx
 }
+.actr.on{
+  transform:rotate(180deg)
+}
 .total{
   height: 80rpx;
   font-size: 28rpx;
@@ -208,4 +211,7 @@ page,.pages{
 .bzR{
   width: 80%;
   margin-left: 30rpx;
+}
+.sf{
+  font-size: 32rpx;
 }

@@ -1,7 +1,10 @@
 /* pages/settle/settle.wxss */
 page,.pages{
-  height: 100%;
+  /* height: 100%; */
   background: #ebebeb;
+}
+.pages{
+  padding-bottom: 100rpx;
 }
 /*头部*/
 .settleHead{
@@ -68,6 +71,9 @@ page,.pages{
   position: absolute;
   right: 10rpx;
   bottom: -10rpx
+}
+.actr.on{
+  transform:rotate(180deg)
 }
 .total{
   height: 80rpx;
@@ -150,6 +156,9 @@ page,.pages{
 .lxL{
   width: 25%;
 }
+.lxL text{
+  color: #d93035;
+}
 .lxR{
   width: 75%;
   height: 100rpx;
@@ -203,7 +212,7 @@ page,.pages{
   display: inline-block;
   width: 40rpx;
   height: 40rpx;
-  font-size: 42rpx;
+  font-size: 40rpx;
   color: #fff;
   line-height: 100rpx;
   text-align: center;
@@ -214,7 +223,8 @@ page,.pages{
   display: block;
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 14px;
+  font-size: 32rpx;
+  font-weight: bold;
   border-radius: 0;
   background: #e4333d;
   color: #fff;
