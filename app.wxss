@@ -15,5 +15,23 @@
   justify-content:space-between;
   padding: 26rpx 30rpx;
   background: #fff;
-  
+}
+.flex{
+  display: -webkit-flex;
+  display: flex;
+}
+.vc{
+  align-items: center;
+}
+.hc{
+  justify-content: center;
+}
+.ha{
+  justify-content: space-around;
+}
+.hb{
+  justify-content: space-between
+}
+.hh{
+  flex-direction: column;
 }

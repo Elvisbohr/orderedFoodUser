@@ -20,7 +20,7 @@
   </navigator>
   <!-- 我的订单End -->
   <!-- 会员中心 -->
-  <navigator class="mineList" url="url">
+  <navigator class="mineList" url="../membercenter/membercenter">
     <view class="mineMsg">
       <image class="mineMsgImg" mode="widthFix" src="../../images/huiy.png"></image>
       <text class="mineMsgTxt">会员中心</text>

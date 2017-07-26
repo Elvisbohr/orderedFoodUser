@@ -72,5 +72,26 @@ Page({
         console.log(that.data.mainHieght)
       }
     });
-  }
+    
+  },
+  onShow:function(){
+  
+
+  },
+  onHide: function () {
+    var i=0;
+    setInterval(function () {
+      i++;
+      wx.setTopBarText({
+        text: "aaaa"+i,
+        success: function (res) {
+          console.log(res);
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      });
+    }, 1000);
+     
+  },
 })

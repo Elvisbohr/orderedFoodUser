@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/mine/mine",
-    "pages/member/member",
+    "pages/membercenter/membercenter",
+    "pages/memberhistory/memberhistory",
     "pages/menu/menu",
     "pages/settle/settle",
     "pages/collect/collect",
