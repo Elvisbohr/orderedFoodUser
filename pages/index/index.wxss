@@ -96,10 +96,22 @@ view{
   color: #fff;
   padding: 5rpx 10rpx;
   border-radius: 8rpx;
+  margin-right: 16rpx;
 
 }
+/* 营业中 */
 .onOpen{
   background: #22ac38;
+}
+/* 代金券 */
+.onChit{
+  background: #ff8688;
+}
+.onMinus{
+  background: #fbaf33;
+}
+.onDiscount{
+  background: #6dd36b;
 }
 .km{
   padding-left: 16rpx; 

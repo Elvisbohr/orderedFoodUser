@@ -37,6 +37,9 @@
         <view class="shopname">店铺名称</view>
         <view class="shopselect">
           <view class="select onOpen">营业中</view>
+          <view class="select onChit">¥</view>
+          <view class="select onMinus">减</view>
+          <view class="select onDiscount">折</view>
         </view>
         <view class="shopsite">
           <text>店铺地址</text>

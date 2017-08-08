@@ -29,7 +29,9 @@ Page({
       money: 0,
       goods: []
     },
-    cartTab: false
+    cartTab: false,
+    chitR:true,   //判断是否有代金券
+    chitMain:false,   //显示领取代金券页面 
   },
 
   attention:function(){ //点击后改变收藏状态
@@ -59,7 +61,7 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          menuhieght: res.windowHeight - 134,
+          menuhieght: res.windowHeight - 174,
         });
         console.log(that.data.menuhieght)
       }
@@ -254,6 +256,33 @@ Page({
       latitude: 23.099994,
       longitude: 113.324520,
       scale: 28
+    })
+  },
+  //点击代金券打开领取页面
+  chitMoney:function(){
+    var that = this;
+    if (that.data.chitR == true){
+      console.log(111)
+      that.setData({
+        // chitR: false,
+      chitMain: true
+      })
+    }
+  },
+  //点击关闭领取代金券页面
+  error:function(){
+    var that =this;
+    // console.log(111)
+    that.setData({
+      chitMain:false,
+    })
+  },
+  //点击确认按钮之后是代金券变灰
+  shitbut:function(){
+    var that =this;
+    that.setData({
+      chitR: false,
+      chitMain: false,
     })
   }
 })

@@ -52,6 +52,12 @@ page,.pages{
 .orderSelect.wc{
   color: #8a8a8a;
 }
+.orderSelect.tkz{
+  color: #f39800;
+}
+.orderSelect.ytk{
+  color: #8a8a8a;
+}
 .orderRight{
   font-size: 24rpx;
 }

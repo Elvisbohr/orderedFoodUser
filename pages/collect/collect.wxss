@@ -36,12 +36,26 @@ view{
   color: #fff;
   padding: 5rpx 10rpx;
   border-radius: 8rpx;
+  margin-right:16rpx;
 }
 .shopname{
   font-size: 30rpx;
 }
 .onOpen{
   background: #22ac38;
+}
+.onDown{
+  background: #e64340
+}
+/* 代金券 */
+.onChit{
+  background: #ff8688;
+}
+.onMinus{
+  background: #fbaf33;
+}
+.onDiscount{
+  background: #6dd36b;
 }
 /*店铺End*/
 /*删除*/
@@ -69,8 +83,8 @@ view{
     background-color: #e64340;  
     width: 180rpx;
     text-align: center;  
-    height: 166rpx;
-    line-height: 166rpx;
+    height: 165rpx;
+    line-height: 165rpx;
     z-index: 4;  
     right: 0;  
     color: #fff  

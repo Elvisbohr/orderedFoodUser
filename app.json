@@ -8,6 +8,7 @@
     "pages/settle/settle",
     "pages/collect/collect",
     "pages/orderform/orderform",
+    "pages/coupon/coupon",
     "pages/orderparticulars/orderparticulars",
     "pages/details/details",
     "pages/userName/userName",

@@ -7,7 +7,7 @@
     <view class="orderNum">
       <image class="jv" src="../../images/cha.png"></image>
       <view class="partyuan">
-       23
+        23
       </view>
       <image class="jv" src="../../images/dao.png"></image>
     </view>
@@ -51,32 +51,46 @@
   <!--店铺名End-->
   <!--已选菜品-->
   <view class="foodCont {{upmore?'':'on'}}">
-  <block>
-    <view class="foodList">
-      <view class="foodname">麻婆豆腐1</view>
-      <view class="foodbz"></view>
-      <view class="foodpart">X1</view>
-      <view class="foodmoney">¥12</view>
-    </view>
-     <view class="foodList">
-      <view class="foodname">麻婆豆腐2</view>
-      <view class="foodbz"></view>
-      <view class="foodpart">X1</view>
-      <view class="foodmoney">¥12</view>
-    </view>
-    <view class="foodList">
-      <view class="foodname">麻婆豆腐3</view>
-      <view class="foodbz"></view>
-      <view class="foodpart">X1</view>
-      <view class="foodmoney">¥12</view>
-    </view> 
-  </block>
+    <block>
+      <view class="foodList">
+        <view class="foodname">麻婆豆腐1</view>
+        <view class="foodbz"></view>
+        <view class="foodpart">X1</view>
+        <view class="foodmoney">¥12</view>
+      </view>
+      <view class="foodList">
+        <view class="foodname">麻婆豆腐2</view>
+        <view class="foodbz"></view>
+        <view class="foodpart">X1</view>
+        <view class="foodmoney">¥12</view>
+      </view>
+      <view class="foodList">
+        <view class="foodname">麻婆豆腐3</view>
+        <view class="foodbz"></view>
+        <view class="foodpart">X1</view>
+        <view class="foodmoney">¥12</view>
+      </view>
+    </block>
   </view>
   <!--已选菜品End-->
   <!--优惠活动-->
   <view class="activity">
     <view class="actl">优惠活动:</view>
     <image bindtap="upmore" class="actr {{upmore?'':'on'}}" mode="widthFix" src="../../images/xiaj.png"></image>
+  </view>
+  <view class="actMain">
+    <view class="actList">
+      <view class="actlistL"><text class="actZ">折</text>店铺折扣</view>
+      <view class="actlistR">-¥ <text>5</text></view>
+    </view>
+    <view class="actList">
+      <view class="actlistL"><text class="actD">¥</text>代金券</view>
+      <view class="actlistR">-¥ <text>5</text></view>
+    </view>
+    <view class="actList">
+      <view class="actlistL"><text class="actJ">减</text>满减活动</view>
+      <view class="actlistR">-¥ <text>5</text></view>
+    </view>
   </view>
   <view class="total">
     <view class="totalL">
@@ -86,7 +100,7 @@
     <view class="sf">实付:¥110</view>
   </view>
   <!--优惠活动End-->
-   <!-- 备注 -->
+  <!-- 备注 -->
   <view class="bz">
     <view class="bzL">
       备注:

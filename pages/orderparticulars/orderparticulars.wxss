@@ -194,6 +194,40 @@ page,.pages{
   align-items: center;
   background: #fff;
 }
+.actMain{
+  background: #fff;
+  padding: 30rpx 0 15rpx;
+}
+.actList{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38rpx 15rpx;
+  font-size: 28rpx;
+}
+.actlistL text{
+  border-radius: 3px;
+  color: #fff;
+  width: 35rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+  display: inline-block;
+  text-align: center;
+  margin-right: 15rpx;
+}
+.actlistL .actZ{
+  background: #6dd36b;
+}
+.actlistL .actD{
+  background: #ff8688;
+}
+.actlistL .actJ{
+  background: #fbaf33;
+}
+.actlistR{
+  color: #d93035;
+}
 /* 备注 */
 .bz{
   display: -webkit-flex;

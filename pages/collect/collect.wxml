@@ -9,6 +9,9 @@
         <view class="shopname">{{item.name}}</view>
         <view class="shopselect">
           <view class="select onOpen">{{item.sect}}</view>
+          <view class="select onChit">¥</view>
+          <view class="select onMinus">减</view>
+          <view class="select onDiscount">折</view>
         </view>
         <view class="shopsite">
           <text>{{item.forms}}</text>

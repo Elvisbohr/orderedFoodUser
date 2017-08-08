@@ -22,7 +22,7 @@
       </view>
       <view class="foodList">
         <view class="foodname">麻婆豆腐</view>
-        <view class="foodbz">大)</view>
+        <view class="foodbz">(大)</view>
         <view class="foodpart">1</view>
         <view class="foodmoney">¥12</view>
       </view>
@@ -33,6 +33,20 @@
   <view class="activity">
     <view class="actl">优惠活动:</view>
     <image bindtap="upmore" class="actr {{upmore?'':'on'}}" mode="widthFix" src="../../images/xiaj.png"></image>
+  </view>
+  <view class="actMain">
+    <view class="actList">
+      <view class="actlistL"><text class="actZ">折</text>店铺折扣</view>
+      <view class="actlistR">-¥ <text>5</text></view>  
+    </view>
+    <view class="actList">
+      <view class="actlistL"><text class="actD">¥</text>代金券</view>
+      <view class="actlistR">-¥ <text>5</text></view>  
+    </view>
+    <view class="actList">
+      <view class="actlistL"><text class="actJ">减</text>满减活动</view>
+      <view class="actlistR">-¥ <text>5</text></view>  
+    </view>
   </view>
   <view class="total">
     <view class="totalL">

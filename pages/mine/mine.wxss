@@ -51,13 +51,16 @@ page,.pages{
 }
 .mineList{
   height: 80rpx;
-  margin-bottom: 15rpx;
   display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20rpx;
   background: #fff;
+  border-bottom: 1px solid #efefef;
+}
+.mineList.mb15{
+  margin-bottom: 15rpx;
 }
 .mineMsg{
   display: -webkit-flex;

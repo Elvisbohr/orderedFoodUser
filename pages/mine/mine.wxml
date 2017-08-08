@@ -28,6 +28,24 @@
     <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
   </navigator>
   <!-- 会员中心End -->
+  <!-- 优惠券 -->
+  <navigator class="mineList mb15" url="../coupon/coupon">
+    <view class="mineMsg">
+      <image class="mineMsgImg" mode="widthFix" src="../../images/discount.png"></image>
+      <text class="mineMsgTxt">我的优惠券</text>
+    </view>
+    <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
+  </navigator>
+  <!-- 优惠券End -->
+  <!-- 客服中心 -->
+  <view class="mineList mb15">
+    <view class="mineMsg">
+      <image class="mineMsgImg" mode="widthFix" src="../../images/kefu.png"></image>
+      <text class="mineMsgTxt">客服中心</text>
+    </view>
+    <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
+  </view>
+  <!-- 客服中心End -->
   <!-- 协议与说明 -->
   <navigator class="mineList" url="../agreement/agreement">
     <view class="mineMsg">
@@ -37,15 +55,7 @@
     <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
   </navigator>
   <!-- 协议与说明End -->
-  <!-- 客服中心 -->
-  <view class="mineList">
-    <view class="mineMsg">
-      <image class="mineMsgImg" mode="widthFix" src="../../images/kefu.png"></image>
-      <text class="mineMsgTxt">客服中心</text>
-    </view>
-    <image class="mineRimg" mode="widthFix" src="../../images/rjt.png"></image>
-  </view>
-  <!-- 客服中心End -->
+  
   <!-- 帮助中心 -->
   <navigator class="mineList" url="../helpcentre/helpcentre">
     <view class="mineMsg">

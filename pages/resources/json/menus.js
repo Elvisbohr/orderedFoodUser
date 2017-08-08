@@ -12,7 +12,8 @@ export default [
             name:'石锅鱼',
             sales:12,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg:1,
           },
           {
             id:12,
@@ -20,7 +21,8 @@ export default [
             name:'石锅牛蛙',
             sales:18,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           }
         ]
       },
@@ -37,7 +39,8 @@ export default [
             name:'白切羊肉',
             sales:39,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 0,
           },
           {
             id:22,
@@ -45,7 +48,8 @@ export default [
             name:'酸醉蟹钳',
             sales:23,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           }
         ]
       },
@@ -62,7 +66,8 @@ export default [
             name:'武昌鱼',
             sales:34,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           },
           {
             id:32,
@@ -70,7 +75,8 @@ export default [
             name:'清蒸草鱼',
             sales:38,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           }
         ]
       },
@@ -87,7 +93,8 @@ export default [
             name:'什锦鲜菇汤',
             sales:19,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           },
           {
             id:42,
@@ -95,7 +102,8 @@ export default [
             name:'番茄蛋汤',
             sales:12,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           }
         ]
       },
@@ -112,7 +120,8 @@ export default [
             name:'蛋炒饭',
             sales:34,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           },
           {
             id:52,
@@ -120,7 +129,8 @@ export default [
             name:'水果沙拉',
             sales:12,
             pic:'dish-1.jpg',
-            count:0
+            count:0,
+            msg: 1,
           }
         ]
       },
@@ -137,7 +147,8 @@ export default [
             name: '蛋炒饭',
             sales: 34,
             pic: 'dish-1.jpg',
-            count: 0
+            count: 0,
+            msg: 1,
           },
           {
             id: 52,
@@ -145,7 +156,8 @@ export default [
             name: '水果沙拉',
             sales: 12,
             pic: 'dish-1.jpg',
-            count: 0
+            count: 0,
+            msg: 1,
           }
         ]
       },
@@ -162,7 +174,8 @@ export default [
             name: '蛋炒饭',
             sales: 34,
             pic: 'dish-1.jpg',
-            count: 0
+            count: 0,
+            msg: 1,
           },
           {
             id: 52,
@@ -170,7 +183,8 @@ export default [
             name: '水果沙拉',
             sales: 12,
             pic: 'dish-1.jpg',
-            count: 0
+            count: 0,
+            msg: 1,
           }
         ]
       },
@@ -187,7 +201,8 @@ export default [
             name: '蛋炒饭',
             sales: 34,
             pic: 'dish-1.jpg',
-            count: 0
+            count: 0,
+            msg: 1,
           },
           {
             id: 52,
@@ -195,7 +210,8 @@ export default [
             name: '水果沙拉',
             sales: 12,
             pic: 'dish-1.jpg',
-            count: 0
+            count: 0,
+            msg: 1,
           }
         ]
       },

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ordertype: 'jd',
+    ordertype: 'jd',  // "jd":待接单;wc:已完成;qc:已取餐;tkz:退款中;ytk:已退款;
   },
 
   /**

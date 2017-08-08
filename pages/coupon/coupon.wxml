@@ -1,0 +1,21 @@
+<!--pages/coupon/coupon.wxml-->
+<view class="pages">
+  <view class="couponMain">
+    
+    <view class="couList flex hb vc">
+      <image class="coupnBj" src="../../images/cardBj.png"></image>
+      <view class="couL">
+        <image class="coulImg" src="../../images/shopmode.png"></image>
+        <view class="couShop">
+          <view class="couName">石锅拌饭</view>
+          <view class="couTime">有效期: <text>09.09-09.09</text></view>
+          <view class="couUser">仅限 <text>瘦瘦的胖子</text>使用</view>
+        </view>
+      </view>
+      <view class="couR">
+        <view class="coumsg">代金券</view>
+        <view class="coumoney">¥ <text>10</text></view>
+      </view>
+    </view>
+  </view>
+</view>
