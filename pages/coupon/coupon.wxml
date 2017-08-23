@@ -19,3 +19,9 @@
     </view>
   </view>
 </view>
+<view class="nullcoupon">
+  <view class="nullcont">
+    <image class="yhplogo" mode="widthFix" src="../../images/yhplogo.png"></image>
+    <image class="yhptit" mode="widthFix" src="../../images/yhptit.png"></image>
+  </view>
+</view>

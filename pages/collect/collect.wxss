@@ -18,6 +18,7 @@ view{
 }
 .shopleft{
   width: 146rpx;
+  height: 146rpx;
 }
 .shopRight{
   margin-left: 35rpx;
@@ -43,6 +44,9 @@ view{
 }
 .onOpen{
   background: #22ac38;
+}
+.onOff{
+  background: #e64340;
 }
 .onDown{
   background: #e64340

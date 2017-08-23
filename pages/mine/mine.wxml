@@ -3,9 +3,9 @@
   <!-- 头部 -->
   <view class="mineHead">
     <view class="mineTx">
-      <image src="{{userInfo.avatarUrl}}"></image>
+      <image src="{{personal.headImg}}"></image>
     </view>
-    <view class="mineName">{{userInfo.nickName}}</view>
+    <view class="mineName">{{personal.name}}</view>
     <navigator class="minexx" url="../details/details">个人信息 ></navigator>
   </view>
   <image class="mineBj" src="../../images/grbj.png"></image>

@@ -141,9 +141,10 @@ Page({
   //城市点击事件
   bindCity: function (e) {
     var city = e.currentTarget.dataset.city;
+    console.log(city)
     this.setData({ city: city })
     wx.reLaunch({
-      url: '../index/index?city='+city,
+      url: '../index/index?city='+ city,
     });
   }
 })

@@ -1,21 +1,22 @@
 <!--pages/collect/collect.wxml-->
 <view class="pages">
-   <view wx:for="{{list}}" wx:key="{{index}}" class="collect">
-    <view url="../menu/menu" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+   <view wx:for="{{collect}}" wx:key="{{index}}" class="collect">
+    <view url="../menu/menu?id={{i.shopId}}" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
       <!-- <view> -->
-        <image class="shopleft" mode="widthFix" src="../../images/shopmode.png"></image>
+        <image class="shopleft" src="{{item.shopImg}}"></image>
       <!-- </view> -->
       <view class="shopRight">
-        <view class="shopname">{{item.name}}</view>
+        <view class="shopname">{{item.shopName}}</view>
         <view class="shopselect">
-          <view class="select onOpen">{{item.sect}}</view>
-          <view class="select onChit">¥</view>
-          <view class="select onMinus">减</view>
-          <view class="select onDiscount">折</view>
+          <view class="select onOpen" wx:if="{{item.isOpen == 1}}">营业中</view>
+          <view class="select onOff" wx:if="{{item.isOpen == 2}}">休息中</view>
+          <view class="select onChit" wx:if="{{item.coupon == 1}}">¥</view>
+          <view class="select onMinus" wx:if="{{item.moneyOff == 1}}">减</view>
+          <view class="select onDiscount" wx:if="{{item.discount == 1}}">折</view>
         </view>
         <view class="shopsite">
-          <text>{{item.forms}}</text>
-          <text class="km">{{item.jl}}km</text>
+          <text>{{item.address}}{{item.detailedAddress}}</text>
+          <text class="km">{{item.distance}}km</text>
         </view>
       </view>
     </view>

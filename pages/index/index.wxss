@@ -75,6 +75,7 @@ view{
 }
 .shopleft{
   width: 146rpx;
+  height: 146rpx;
 }
 .shopRight{
   margin-left: 35rpx;
@@ -102,6 +103,9 @@ view{
 /* 营业中 */
 .onOpen{
   background: #22ac38;
+}
+.onff{
+  background: #d02132;
 }
 /* 代金券 */
 .onChit{

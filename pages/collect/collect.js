@@ -1,49 +1,57 @@
 // pages/collect/collect.js
+var app = getApp();
 var initdata = function (that) {
-  var list = that.data.list
-  for (var i = 0; i < list.length; i++) {
-    list[i].txtStyle = ""
+  var collect = that.data.collect
+  for (var i = 0; i < collect.length; i++) {
+    collect[i].txtStyle = ""
   }
-  that.setData({ list: list })
+  that.setData({ collect: collect })
 }
 Page({
   data: {
     delBtnWidth: 180,//删除按钮宽度单位（rpx） 
-    list: [
-      {
-        txtStyle: "",
-        jl: "1",
-        name: "凯宾斯基",
-        sect:'营业中',
-        forms:'南中环清空基地',
-      },
-      {
-        txtStyle: "",
-        jl: "123",
-        name: "万达文华",
-        sect: '营业中',
-        forms: '南中环清空基地',
-      },
-      {
-        txtStyle: "",
-        icon: "12",
-        name: "如家汉庭",
-        sect: '营业中',
-        forms: '南中环清空基地',
-      },
-      {
-        txtStyle: "",
-        jl: "32",
-        name: "指尖快递4",
-        sect: '营业中',
-        forms: '南中环清空基地',
-      },
-    ]
+    // list: [
+    //   {
+    //     txtStyle: "",
+    //     jl: "1",
+    //     name: "凯宾斯基",
+    //     sect:'营业中',
+    //     forms:'南中环清空基地',
+    //   },
+    //   {
+    //     txtStyle: "",
+    //     jl: "123",
+    //     name: "万达文华",
+    //     sect: '营业中',
+    //     forms: '南中环清空基地',
+    //   },
+    //   {
+    //     txtStyle: "",
+    //     icon: "12",
+    //     name: "如家汉庭",
+    //     sect: '营业中',
+    //     forms: '南中环清空基地',
+    //   },
+    //   {
+    //     txtStyle: "",
+    //     jl: "32",
+    //     name: "指尖快递4",
+    //     sect: '营业中',
+    //     forms: '南中环清空基地',
+    //   },
+    // ]
   },
 
   
   onLoad: function (options) {
+    var that = this,
+    data = {};
+    data.openid = app.globalData.openId
+    data.lat = app.globalData.lat
+    data.lon = app.globalData.lon
+    console.log(data)
     this.initEleWidth();
+    this.collectShop(data);
   },
   touchS: function (e) {
     if (e.touches.length == 1) {
@@ -74,11 +82,11 @@ Page({
       }
       //获取手指触摸的是哪一项  
       var index = e.target.dataset.index;
-      var list = this.data.list;
-      list[index].txtStyle = txtStyle;
+      var collect = this.data.collect;
+      collect[index].txtStyle = txtStyle;
       //更新列表的状态  
       this.setData({
-        list: list
+        collect: collect
       });
     }
   },
@@ -94,11 +102,11 @@ Page({
       var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
       //获取手指触摸的是哪一项  
       var index = e.target.dataset.index;
-      var list = this.data.list;
-      list[index].txtStyle = txtStyle;
+      var collect = this.data.collect;
+      collect[index].txtStyle = txtStyle;
       //更新列表的状态  
       this.setData({
-        list: list
+        collect: collect
       });
     }
   },
@@ -132,18 +140,24 @@ Page({
         if (res.confirm) {
           //获取列表中要删除项的下标  
           var index = e.target.dataset.index;
-          var list = that.data.list;
+          var collect = that.data.collect;
+          console.log(collect[index].id)
+          var data = [];
+          data.id = collect[index].id;
+          console.log(data)          
+          that.deleteCollect(data);
+          wx.showToast({
+              title: '删除成功',
+              icon: 'success',
+              duration: 2000
+          })
           //移除列表中下标为index的项  
-          list.splice(index, 1);
+          collect.splice(index, 1);
           //更新列表的状态  
           that.setData({
-            list: list
+            collect: collect
           });
-          wx.showToast({
-            title: '删除成功',
-            icon: 'success',
-            duration: 2000
-          })
+         
         } else {
           initdata(that)
         }
@@ -160,6 +174,46 @@ Page({
         
       }
     })
-  
+  },
+//   收藏店铺接口
+  collectShop:function(data){
+    var that = this;
+    wx.getStorage({
+      key: 'userLocation',
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+    wx.request({
+      url: app.globalData.adminAddress + '/applet_customer/myShopCollectList',
+      data: data,
+      method: "GET",
+      // header: { 'content-type': 'application/x-www-form-urlencoded' },
+      success: function (res) {
+        wx.hideLoading();
+
+        that.setData({
+          collect: res.data.data,
+        });
+      },
+      fail: function () {
+        wx.showLoading('请求数据失败');
+      }
+    })
+  },
+  deleteCollect:function(data){
+      var that = this;
+      wx.request({
+          url: app.globalData.adminAddress + '/applet_customer/deleteCollectShop',
+          data: data,
+          method: "GET",
+          header: { 'content-type': 'application/x-www-form-urlencoded' },
+          success: function (res) {
+            console.log('删除成功')
+          },
+          fail: function () {
+              wx.showLoading('请求数据失败');
+          }
+      })
   }
 })
