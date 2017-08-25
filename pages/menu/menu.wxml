@@ -78,8 +78,8 @@
                                     <text hidden="{{total.count}}" class="cart-item-total-num bc_red">{{total.count}}</text>
                                 </view>
                             </view>
-                            <text class="cart-item-total-price">￥{{total.money}}</text>
-                            <text class="cart-item-yh-price">优惠前价格￥{{total.money}}</text>
+                            <text class="cart-item-total-price">￥{{total.price}}</text>
+                            <!-- <text class="cart-item-yh-price">优惠前价格￥{{total.money}}</text> -->
                         </view>
                         <view class="cart-tab-item">
                             <navigator url="../settle/settle?title=navigate" open-type="navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</navigator>
@@ -92,25 +92,25 @@
                         </view>
                         <!--已点餐品-->
                         <view class="shopmain">
-                            <block wx:for="{{total.list}}">
+                            <block wx:for="{{total.list}}">                            
                                 <view class="shopList">
                                     <view class="shopLeft">
-                                        <view class="shopName">{{item.foodname}}</view>
+                                        <view class="shopName">{{item.name}}</view>
                                         <view class="shopMoney">
-                                            <text class="yyuan">¥</text>{{item.foodprice}}</view>
+                                            <text class="yyuan">¥</text>{{item.price}}</view>
                                     </view>
                                     <view class="shopRight">
                                         <view class="dish-item-count" style="">
 
                                             <view class="dish-item-tab">
-                                                <view hidden="{{item.count == 0}}" class="dish-item-count-minus" data-cid="{{item.id}}" data-type-index="{{item.typeIndex}}" bindtap="minusCount">
+                                                <view hidden="{{item.count == 0}}" class="dish-item-count-minus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" bindtap="minusCount">
                                                     <image class="image" src="../../images/countMinus.png" />
                                                 </view>
                                             </view>
                                             <view class="dish-item-count-text dish-item-tab">
                                                 <text hidden="{{item.count == 0}}">{{item.count}}</text>
                                             </view>
-                                            <view class="dish-item-count-plus" data-cid="{{item.id}}" data-type-index="{{item.typeIndex}}" bindtap="addCount">
+                                            <view class="dish-item-count-plus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" bindtap="addCount">
                                                 <image class="image" src="../../images/countSelAdd.png" />
                                             </view>
                                         </view>
@@ -302,7 +302,8 @@
                 <view class="sfL">
                     ¥ <text>{{isPic}}</text>
                     <block>
-                        <text class="sflMsg">{{isspecname}}{{istastename}}</text>
+                        <text class="sflMsg" wx:if="{{isspecname != null}}">({{isspecname}})</text>
+                        <text class="sflMsg" wx:if="{{istastename != undefind}}">({{istastename}})</text>
                     </block>
                 </view>
                 <view class="sfR" bindtap="shopcar">
