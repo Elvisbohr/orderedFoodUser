@@ -76,6 +76,7 @@ Page({
         console.log(that.data.mainHieght)
       }
     });
+
     
     
   },
@@ -160,7 +161,10 @@ Page({
   },
   
   onShow:function(){
-  
+      wx.setStorage({
+          key: 'total',
+          data: { count: 0, price: 0, list: [] },
+      })
 
   },
   onHide: function () {

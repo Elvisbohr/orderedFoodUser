@@ -35,16 +35,12 @@ Page({
         chitR: true,   //判断是否有代金券
         chitMain: false,   //显示领取代金券页面 
         specShade: false,   //是否显示规格页面
-        // spec: [    //选规格
-        //     { name: '特大', pic: '14' },
-        //     { name: '大', pic: '13' },
-        //     { name: '中', pic: '12' },
-        //     { name: '小', pic: '11' }
-        // ],
-        // taste: [ //选口味
-        //     { name: '微辣' },
-        //     { name: '辣' }
-        // ]
+    
+
+
+
+        specifications: {},//当前选择的规格      
+        flavors: {},//当前选择的口味
     },
     onLoad: function (options) {
         var that = this;
@@ -77,6 +73,10 @@ Page({
         var menuData = [];
         menuData.shopId = options.id;
         that.menuLsit(menuData)
+        //获取店名存入全局
+        // console.log(options.name)
+        app.globalData.shopName = options.name;
+        // console.log(app.globalData.shopName)        
     },
     attention: function () { //点击后改变收藏状态
         var that = this;
@@ -118,34 +118,39 @@ Page({
         // console.log(menus)
         // console.log(curIndex)
         // console.log(dish)
-   
+
         var selectSpec = []
         selectSpec = dish
         that.setData({
-            selectSpec : selectSpec,
+            selectSpec: selectSpec,
             specShade: true,
         })
     },
+    //点击规格
     spec: function (e) { //点击获取选到的规格
         var that = this;
         var num = e.currentTarget.dataset.index;  //获取点击的是那个规格
+
         var selectSpec = that.data.selectSpec;    //获取菜品数组
         var spec = selectSpec.specifications;    //获取菜品规格数组
+
+        var specifications = this.data.specifications;
+        specifications = spec[num];
+
         for (var i = 0; i < spec.length; i++) {   //循环这个数组把所有都变成false
             spec[i].isspec = false;
         }
         spec[num].isspec = true;  //把点击的这个改为true
-        
-        var isPic = spec[num].price   //声明点击的这个规格多钱
-        selectSpec.specId = spec[num].id;  //获取规格id    
-        // selectSpec.isprice = spec[num].price    //把获取到的这个规格需要的钱放入数组中
-        selectSpec.price = spec[num].price    //把获取到的这个规格需要的钱放入数组中(更改原数组)
-        // var isspecname = '(' + spec[num].name + ')' //声明点击的这个名字
-        var isspecname = spec[num].name  //声明点击的这个名字
+
+        var isspecname = spec[num].name;  //声明点击的这个名字
+        var isspecId = spec[num].id;  //声明点击的这个名字
+
         that.setData({      //赋值
+            specifications: specifications,
             selectSpec: selectSpec,
-            isPic: isPic,
             isspecname: isspecname,
+            isspecId: isspecId,
+            isPic: spec[num].price
         })
     },
     //点击口味
@@ -154,59 +159,155 @@ Page({
         var num = e.currentTarget.dataset.index;  //获取点击的是那个规格
         var selectSpec = that.data.selectSpec;    //获取菜品数组        
         var taste = selectSpec.flavors;    //获取规格数组
+
+        var flavors = this.data.flavors;
+        flavors = taste[num];
+
         for (var i = 0; i < taste.length; i++) {   //循环这个数组把所有都变成false
             taste[i].istaste = false;
         }
         taste[num].istaste = true;  //把点击的这个改为true
+
         selectSpec.tasteId = taste[num].id;  //获取口味id
-        // var istastename = '(' + taste[num].name + ')' //声明点击的这个名字
+
         var istastename = taste[num].name  //声明点击的这个名字
         that.setData({      //赋值
             selectSpec: selectSpec,
+            flavors: flavors,
             istastename: istastename,
+            istasteId: taste[num].id
         })
     },
+
     //点击规格内的加入购物车
     shopcar: function () {
         var that = this;
+        var total = this.data.total;
+
+        //2.整理数组
         var upShopCar = {};         //规格选好后整体数组
-        upShopCar.count = 1;                                 //菜品数量(默认为0)
-        upShopCar.name = that.data.selectSpec.name;    //菜品名称
         upShopCar.id = that.data.selectSpec.id;   //菜品Id
-        upShopCar.goodsSpecificationId = that.data.selectSpec.specId; //菜品规格id
-        upShopCar.goodsSpecificationName = that.data.isspecname; //菜品规格名称
-        upShopCar.goodsFlavorId = that.data.selectSpec.tasteId; //菜品口味id
-        upShopCar.goodsFlavorName = that.data.istastename; //菜品口味名称
-        upShopCar.price = that.data.isPic   //菜品金额
-        // console.log(upShopCar)
-        if (upShopCar.goodsSpecificationName == undefined){
+        upShopCar.name = that.data.selectSpec.name;    //菜品名称
+        upShopCar.boxPrice = that.data.selectSpec.boxPrice;   //菜品餐盒费
+        upShopCar.price = that.data.isPic;//单价
+        var flavors = this.data.flavors;//口味
+        var specifications = this.data.specifications;//规格
+        var str = this.data.isspecname + "," + this.data.istastename;//规格和口味的中文字符串
+        var idStr = this.data.isspecId + "," + this.data.istasteId;//规格和口味的id字符串
+
+        //2.压入当前选择商品
+        var totalGood = total.list.find(function (v) {
+            return v.id == upShopCar.id;
+        });
+        console.log(this.data.isspecname === undefined)
+        //判断规格和口味是否都选择
+        if (this.data.isspecname === "" || this.data.isspecname === undefined) {
             wx.showToast({
                 title: '请选择规格',
                 icon: 'loading',
                 duration: 800
             })
-        } else if (upShopCar.goodsFlavorName == undefined){
+        } else if (this.data.istastename === "" || this.data.istastename === undefined) {
             wx.showToast({
                 title: '请选择口味',
                 icon: 'loading',
                 duration: 800
             })
-        }else{
+        } else {
+            //1.总个数递增,总价钱增
+            total.count += 1;           
+            total.price = (Number(total.price) + Number(this.data.isPic)).toFixed(2);
+            console.log(total.price)
+            if (!totalGood) {
+                //当前选择的餐品之前没有选择过
+                upShopCar.standard = [];
+                upShopCar.standard.push({
+                    flavors: flavors,
+                    specifications: specifications,
+                    count: 1,
+                    str: str,
+                    idStr: idStr
+                });
+                total.list.push(upShopCar);
+            } else {
+                //当前餐品已经选择过,判断当前同种规格的是否选择过
+                var standard = totalGood.standard.find(function (v) {
+                    return v.str == str;
+                });
 
-            // console.log('选择成功')
-            // total总个数增,总额增
-            let total = this.data.total;
-            total.count += 1;
-            total.price = (Number(total.price) + Number(upShopCar.price)).toFixed(2);
-            total.list.push(upShopCar);
-            // console.log(total)
-            that.setData({
+
+                if (!standard) {
+                    //同种规格的已选择过
+                    totalGood.standard.push({
+                        flavors: flavors,
+                        count: 1,
+                        specifications: specifications,
+                        str: str,
+                        idStr: idStr
+                    });
+                } else {
+                    standard.count += 1;
+                }
+            }
+
+            this.setData({
                 total: total,
-                upShopCar: upShopCar,
                 specShade: false,
-            })
+                flavors: {},
+                specifications: {},
+                istastename: '',
+                isspecname: '',
+                isPic: 0
+            });
         }
-        
+
+
+
+
+
+
+
+
+
+
+
+        // var upShopCar = {};         //规格选好后整体数组
+        // upShopCar.count = 1;                                 //菜品数量(默认为0)
+        // upShopCar.name = that.data.selectSpec.name;    //菜品名称
+        // upShopCar.goodsSpecificationId = that.data.selectSpec.specId; //菜品规格id
+        // upShopCar.goodsSpecificationName = that.data.isspecname; //菜品规格名称
+        // upShopCar.goodsFlavorId = that.data.selectSpec.tasteId; //菜品口味id
+        // upShopCar.goodsFlavorName = that.data.istastename; //菜品口味名称
+        // upShopCar.price = that.data.isPic   //菜品金额
+        // // console.log(upShopCar)
+        // if (upShopCar.goodsSpecificationName == undefined) {
+        //     wx.showToast({
+        //         title: '请选择规格',
+        //         icon: 'loading',
+        //         duration: 800
+        //     })
+        // } else if (upShopCar.goodsFlavorName == undefined) {
+        //     wx.showToast({
+        //         title: '请选择口味',
+        //         icon: 'loading',
+        //         duration: 800
+        //     })
+        // } else {
+
+        //     // console.log('选择成功')
+        //     // total总个数增,总额增
+        //     let total = this.data.total;
+        //     total.count += 1;
+        //     total.price = (Number(total.price) + Number(upShopCar.price)).toFixed(2);
+        //     total.list.push(upShopCar);
+        //     // console.log(total)
+        //     that.setData({
+        //         total: total,
+        //         upShopCar: upShopCar,
+        //         specShade: false,
+        //     })
+        // }
+
     },
 
     // 点击显示全图
@@ -235,8 +336,8 @@ Page({
     selectMenu: function (event) {  //点击商品分类列表
         let data = event.currentTarget.dataset;
         // console.log(data)
-        var that = this, 
-        menus = that.data.menus;
+        var that = this,
+            menus = that.data.menus;
         for (var i = 0; i < menus.length; i++) {
             if (i === parseInt(data.id)) {
                 menus[i].curClass = "on";
@@ -254,168 +355,463 @@ Page({
     addCount: function (event) {
         // menus列表个数递增
         var dataset = event.currentTarget.dataset;  //获取点击的data-的信息 id fid
-        let menus = this.data.menus;        //获取菜品列表
-        let curIndex = this.data.selectedMenuId;    //获取他是属于哪个分类的
-        // console.log(dataset)
-        // console.log(menus)
-        // console.log(curIndex)
-        let dish = menus[curIndex].goodses.find(function (v) {
-            return v.id == dataset.cid
-        })
-        console.log(dish)
-        
-        
-        if(dish != undefined){
-            dish.count += 1;
-        }
+
+        console.log("dataset");
+        console.log(dataset);
         // total总个数增,总额增
         let total = this.data.total;
         total.count += 1;
-        // 判断钱的增加从哪里加
-        var totalnum = event.currentTarget.dataset.index;   //获取点击事件里的data-index的值
-        console.log(total.list[totalnum])
-        if (total.list[totalnum] != undefined){     //判断他是从列表上点击加号还是从已点列表上查看
-            console.log('已点菜品列表')
-            if (total.list[totalnum].goodsSpecificationName == undefined) {
-                console.log('无规格菜品')
-                total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
-            } else {
-                console.log('有规格菜品')
-                
-                total.price = (Number(total.price) + Number(total.list[totalnum].price)).toFixed(2);
-            }
-            console.log(totalnum)
-        }else{
-            console.log('未点菜品列表')
-            total.price = (Number(total.price) + Number(dish.price)).toFixed(2); 
 
+
+        let menus = this.data.menus;        //获取菜品列表
+        let curIndex = this.data.selectedMenuId;    //获取他是属于哪个分类的
+        let dish = menus[curIndex].goodses.find(function (v) {
+            return v.id == dataset.cid
+        })
+        if (dish) {
+            if (dish != undefined) {    //判读如果是有规格的菜品
+                dish.count += 1;    //同步加1
+            }
+            this.setData({
+                'menus': menus
+            });
         }
-        
-        // console.log(total)
-        
-        //total列表内容
-        let isFood = total.list.find(function (v) {
+
+        var idStr = dataset.idStr;
+        var good = total.list.find(function (v) {
             return v.id == dataset.cid;
         })
-        console.log(isFood)
-        if (isFood === undefined) {
-            dish.typeIndex = curIndex;
-            total.list.push(dish);
 
-        } else {
-            
-            if (total.list[totalnum] != undefined){
-                total.list[totalnum].count += 1;
-            }else{
-                isFood.count += 1;
+        if (good) {
+            //分有规格和无规格
+            if (good.standard) {
+                var g = good.standard.find(function (v) {
+                    return v.idStr == idStr;
+                })
+                g.count += 1;
+                total.price = (Number(total.price) + Number(g.specifications.price)).toFixed(2);
+            } else {
+                good.count += 1;
+                total.price = (Number(total.price) + Number(good.price)).toFixed(2);
             }
+        } else {
+            //无规格
+            dish.count = 1;
+            total.list.push(dish)
+            total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
         }
-       
+
+        console.log("good");
+        console.log(good);
         //判断total是否有菜品
         let cartTab = this.data.cartTab;
         let carshop = this.data.carshop;
         if (total.count <= 0) {
-            // cartTab = false;
             carshop = true;
         } else {
-            // cartTab = true;
             carshop = false;
         }
         this.setData({
-            'menus': menus,
-            'cartTab': cartTab,
             'carshop': carshop,
             'total': total
         });
+
+        // if (good.standard) {
+        //     var g = good.standard.find(function (v) {
+        //         return v.idStr == idStr;
+        //     })
+        //     g.count += 1;
+        //     total.price = (Number(total.price) + Number(g.specifications.price)).toFixed(2);
+        // } else {
+        //     good.count += 1;
+        //     total.price = (Number(total.price) + Number(good.price)).toFixed(2);
+        // }
+        //判断那里的加号点击
+        // var types = dataset.types;
+        // if (types) {
+
+        //     var good = total.list.find(function (v) {
+        //         return v.id == dataset.cid;
+        //     })
+        //     if (good){
+        //         good.count += 1;
+        //         total.price = (Number(total.price) + Number(good.price)).toFixed(2);
+        //     }else{
+        //         dish.count = 1;
+        //         total.list.push(dish)
+        //         total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
+        //     }
+
+
+        // }else{
+
+        // }
+
+
+
+
+
+
+
+
+
+        // // 判断钱的增加从哪里加
+        // var totalnum = event.currentTarget.dataset.index;   //获取点击事件里的data-index的值
+        // console.log(totalnum)
+        // if (total.list[totalnum] != undefined) {     //判断他是从列表上点击加号还是从已点列表上查看
+        //     console.log('已点菜品列表')
+        //     if (total.list[totalnum].standard == undefined) {
+        //         console.log('无规格菜品')
+        //         total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
+        //     } else {
+        //         console.log('有规格菜品');
+        //         var idStr = dataset.idStr;
+        //         var good = total.list.find(function(v){
+        //             return v.id == dataset.cid;
+        //         })
+        //         var g = good.standard.find(function(v){
+        //             return v.idStr == idStr;
+        //         })
+        //         g.count += 1;
+        //         // total.price = total.price + g.specifications.price;
+        //         total.price = (Number(total.price) + Number(g.specifications.price)).toFixed(2);
+        //     }
+        // } else {
+        //     console.log('未点菜品列表')
+        //     total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
+        // }
+        // //total列表内容
+        // let isFood = total.list.find(function (v) {
+        //     return v.id == dataset.cid;     //已点菜品列表
+        // })
+        // console.log(isFood)
+        // if (isFood === undefined) {
+        //     dish.typeIndex = curIndex;
+        //     total.list.push(dish);
+        // } else {
+        //     if (total.list[totalnum] != undefined) {
+        //         total.list[totalnum].count += 1;
+        //     } else {
+        //         isFood.count += 1;
+        //     }
+        // }
+
+
+
+
+
+        // menus列表个数递增
+        // var dataset = event.currentTarget.dataset;  //获取点击的data-的信息 id fid
+        // let menus = this.data.menus;        //获取菜品列表
+        // let curIndex = this.data.selectedMenuId;    //获取他是属于哪个分类的
+        // let dish = menus[curIndex].goodses.find(function (v) {
+        //     return v.id == dataset.cid
+        // })
+        // console.log(dish)
+
+
+        // if (dish != undefined) {
+        //     dish.count += 1;
+        // }
+        // // total总个数增,总额增
+        // let total = this.data.total;
+        // total.count += 1;
+        // // 判断钱的增加从哪里加
+        // var totalnum = event.currentTarget.dataset.index;   //获取点击事件里的data-index的值
+        // console.log(total.list[totalnum])
+        // if (total.list[totalnum] != undefined) {     //判断他是从列表上点击加号还是从已点列表上查看
+        //     console.log('已点菜品列表')
+        //     if (total.list[totalnum].goodsSpecificationName == undefined) {
+        //         console.log('无规格菜品')
+        //         total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
+        //     } else {
+        //         console.log('有规格菜品')
+
+        //         total.price = (Number(total.price) + Number(total.list[totalnum].price)).toFixed(2);
+        //     }
+        //     console.log(totalnum)
+        // } else {
+        //     console.log('未点菜品列表')
+        //     total.price = (Number(total.price) + Number(dish.price)).toFixed(2);
+
+        // }
+
+        // // console.log(total)
+
+        // //total列表内容
+        // let isFood = total.list.find(function (v) {
+        //     return v.id == dataset.cid;
+        // })
+        // console.log(isFood)
+        // if (isFood === undefined) {
+        //     dish.typeIndex = curIndex;
+        //     total.list.push(dish);
+
+        // } else {
+
+        //     if (total.list[totalnum] != undefined) {
+        //         total.list[totalnum].count += 1;
+        //     } else {
+        //         isFood.count += 1;
+        //     }
+        // }
+
+        // //判断total是否有菜品
+        // let cartTab = this.data.cartTab;
+        // let carshop = this.data.carshop;
+        // if (total.count <= 0) {
+        //     // cartTab = false;
+        //     carshop = true;
+        // } else {
+        //     // cartTab = true;
+        //     carshop = false;
+        // }
+        // this.setData({
+        //     'menus': menus,
+        //     'cartTab': cartTab,
+        //     'carshop': carshop,
+        //     'total': total
+        // });
     },
     minusCount: function (event) {
         // menus列表个数递减
         var dataset = event.currentTarget.dataset;
-        let menus = this.data.menus;
-        let curIndex = this.data.selectedMenuId;
-        
-        if (dataset.typeIndex === undefined) {
-            curIndex = this.data.selectedMenuId;
-        } else {
-            curIndex = dataset.typeIndex;
-        }
+        let total = this.data.total;
+        total.count -= 1;
+        console.log(dataset)
+
+        let menus = this.data.menus;        //获取菜品列表
+        let curIndex = this.data.selectedMenuId;    //获取他是属于哪个分类的
         let dish = menus[curIndex].goodses.find(function (v) {
             return v.id == dataset.cid
         })
-        // console.log(dataset.cid)
-        
-        // console.log(dish)
-        if (dish != undefined){
-            dish.count -= 1;
-        }
-        // total总个数减,总额减
-        let total = this.data.total;
-        total.count -= 1;
-        // 判断钱的减少从哪里减
-        var totalnum = event.currentTarget.dataset.index;   //获取点击事件里的data-index的值
-        console.log(total.list[totalnum])
-        if (total.list[totalnum] != undefined) {     //判断他是从列表上点击减号还是从已点列表上查看
-            console.log('已点菜品列表')
-            if (total.list[totalnum].goodsSpecificationName == undefined) {
-                console.log('无规格菜品')
-                total.price = (Number(total.price) - Number(dish.price)).toFixed(2);
-            } else {
-                console.log('有规格菜品')
-
-                total.price = (Number(total.price) - Number(total.list[totalnum].price)).toFixed(2);
+        if (dish) {
+            if (dish != undefined) {    //判读如果是有规格的菜品
+                dish.count -= 1;    //同步减1
             }
-            console.log(totalnum)
-        } else {
-            console.log('未点菜品列表')
-           
-            total.price = (Number(total.price) - Number(dish.price)).toFixed(2);
+            this.setData({
+                'menus': menus
+            });
         }
-        
-        //更新total列表内容
-        // for (var i = 0; i < total.list.length; i++) {
-        //     if (total.list[i].id === dataset.cid) {
-        //         if (total.list[i].count <= 1) {
-        //             total.list.splice(i, 1);
-        //         } else {
-        //             total.list[i].count -= 1;
-        //         }
-        //     }
-        // }
-        let isFood = total.list.find(function (v) {
+
+        var idStr = dataset.idStr;
+        var good = total.list.find(function (v) {   //查找和当前点击的匹配Id的
             return v.id == dataset.cid;
         })
-        console.log(isFood)
-        if (isFood === undefined) {
-            dish.typeIndex = curIndex;
-            total.list.push(dish);
 
-        } else {
+        if (good) {
+            //分有规格和无规格
+                //有规格
+            if (good.standard) {
+                var g = good.standard.find(function (v) {
+                    return v.idStr == idStr;
+                })
+                g.count -= 1;
+                console.log(good.standard.findIndex(function (v) {
 
-            if (total.list[totalnum] != undefined) {
-                total.list[totalnum].count -= 1;
+                    return v.idStr == idStr;
+
+                }))
+               
+                if (g.count < 1) {
+                    var i = good.standard.findIndex(function(v){
+                        console.log('删除数组中单个数组')
+                        return v.idStr == idStr;
+                    })
+                    console.log(i)
+                    good.standard.splice(i, 1);
+                    //点击的这个数组剩余的长度
+                    console.log('good.standard.length')
+                    console.log(good.standard.length)
+                    if (good.standard.length < 1) { //判断如果整个点击的数组数量少于0删除整个数组
+                        console.log('删除整个数组')
+                        var i = total.list .findIndex(function (v) {
+                            return v.id == dataset.cid;
+                        })
+                        // console.log(i)
+                        total.list.splice(i, 1);
+                    }
+                }
+               
+                total.price = (Number(total.price) - Number(g.specifications.price)).toFixed(2);
             } else {
-                isFood.count -= 1;
+                console.log('无规格')
+                good.count -= 1;    //匹配项是数量减一
+                total.price = (Number(total.price) - Number(good.price)).toFixed(2);    //总钱数减
+
+                // console.log(total.list.findIndex(function (v) {     
+                //     return v.id == dataset.cid;
+                // }))
+                if (good.count < 1) {       //判读如果数量少于一删除掉数组里的该字段
+                    var i = total.list.findIndex(function (v) {
+                        return v.id == dataset.cid;
+                    })
+                    total.list.splice(i, 1);
+                }
             }
+        } else {
+            //无规格
+            console.log('else无规格')
+            dish.count = 1;
+            total.list.push(dish)
+            total.price = (Number(total.price) - Number(dish.price)).toFixed(2);
         }
+
+        console.log("good");
+        console.log(good);
         //判断total是否有菜品
         let cartTab = this.data.cartTab;
         let carshop = this.data.carshop;
-        let shop = this.data.shop;
         if (total.count <= 0) {
-            cartTab = false;
             carshop = true;
-            shop = false;
         } else {
-            cartTab = true;
             carshop = false;
         }
         this.setData({
-            'menus': menus,
-            'cartTab': cartTab,
             'carshop': carshop,
-            'total': total,
-            shop: shop,
+            'total': total
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // //获取当前数组下标
+        // console.log(dataset)
+        // var curIndex = dataset.index;
+        // //如果没有规格,获取原列表的个数并减
+        // var typeIndex = total.list[curIndex].typeIndex;
+        // if (typeIndex != undefined) {
+        //     var menu = menus[typeIndex].goodses.find(function (v) {
+        //         return v.id == total.list[curIndex].id;
+        //     })
+        //     menu.count -= 1;
+        //     this.setData({
+        //         menus: menus
+        //     });
+        // }
+
+        // //1.总个数递减
+        // total.count -= 1;
+        // total.price = total.price - total.list[curIndex].price;
+        // //2.减当前餐品的数量
+        // total.list[curIndex].count -= 1;
+        // if (total.list[curIndex].count) {
+
+        // }
+        // this.setData({
+        //     total: total
+        // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // let dish = menus[curIndex].goodses.find(function (v) {
+        //     return v.id == dataset.cid
+        // })
+        // // console.log(dataset.cid)
+
+        // // console.log(dish)
+        // if (dish != undefined) {
+        //     dish.count -= 1;
+        // }
+        // // 判断钱的减少从哪里减
+        // var totalnum = event.currentTarget.dataset.index;   //获取点击事件里的data-index的值
+        // console.log(total.list)
+        // if (total.list[totalnum].count == 1) {
+        //     console.log('删')
+        //     total.list.splice(totalnum, 1);
+        //     // 更新total列表内容
+        // }else{
+        //     //  console.log(total.list[totalnum])
+
+        //     if (total.list[totalnum] != undefined) {     //判断他是从列表上点击减号还是从已点列表上查看
+        //         console.log('已点菜品列表')
+        //         if (total.list[totalnum].goodsSpecificationName == undefined) {
+        //             console.log('无规格菜品')
+        //             total.price = (Number(total.price) - Number(dish.price)).toFixed(2);
+        //         } else {
+        //             console.log('有规格菜品')
+
+        //             total.price = (Number(total.price) - Number(total.list[totalnum].price)).toFixed(2);
+        //         }
+        //         // console.log(totalnum)
+        //     } else {
+        //         // console.log('未点菜品列表')
+
+        //         total.price = (Number(total.price) - Number(dish.price)).toFixed(2);
+        //     }
+        // }
+
+        // let isFood = total.list.find(function (v) {
+        //     return v.id == dataset.cid;
+        // })
+        // console.log(isFood)
+        // if (isFood === undefined) {
+        //     dish.typeIndex = curIndex;
+        //     total.list.push(dish);
+
+        // } else {
+
+        //     if (total.list[totalnum] != undefined) {
+        //         total.list[totalnum].count -= 1;
+        //     } else {
+        //         isFood.count -= 1;
+        //     }
+        // }
+        // //判断total是否有菜品
+        // let cartTab = this.data.cartTab;
+        // let carshop = this.data.carshop;
+        // let shop = this.data.shop;
+        // if (total.count <= 0) {
+        //     cartTab = false;
+        //     carshop = true;
+        //     shop = false;
+        // } else {
+        //     cartTab = true;
+        //     carshop = false;
+        // }
+        // this.setData({
+        //     'menus': menus,
+        //     'cartTab': cartTab,
+        //     'carshop': carshop,
+        //     'total': total,
+        //     shop: shop,
+        // });
     },
     cartshopbtn: function () {
         var that = this;
@@ -438,7 +834,7 @@ Page({
             data: that.data.total,
             success: function () {
                 wx.navigateTo({
-                    url: '../fail/fail?shopid=' + that.data.shopid,
+                    url: '../settle/settle?shopId=' + that.data.shopId,
                 })
             }
         })
@@ -538,7 +934,7 @@ Page({
             success: function (res) {
                 // console.log('判断店铺是否已收藏接口')
                 // console.log(res)
-                if (res.data.data.isCollect){
+                if (res.data.data.isCollect) {
                     console.log('已收藏')
                     that.setData({
                         isCollect: res.data.data.isCollect,
@@ -546,7 +942,7 @@ Page({
                         attention: 1,
                     });
                     // console.log(that.data)
-                }else{
+                } else {
                     console.log('未收藏')
                     that.setData({
                         isCollect: res.data.data.isCollect,
@@ -594,7 +990,7 @@ Page({
             }
         })
     },
-    isActivity:function(data){
+    isActivity: function (data) {
         var that = this;
         wx.request({
             url: app.globalData.adminAddress + '/applet_customer/getShopPreferentials',
@@ -610,11 +1006,11 @@ Page({
                     activityIndex: activityIndex,
                 })
                 //判断该店是否有{{代金券}}活动
-                if (res.data.data.coupon == '' || res.data.data.coupon == undefined){   
+                if (res.data.data.coupon == '' || res.data.data.coupon == undefined) {
                     that.setData({
-                        iscoupon :false,
+                        iscoupon: false,
                     })
-                }else{
+                } else {
                     that.setData({
                         coupon: res.data.data.coupon,
                         iscoupon: true,
@@ -649,13 +1045,13 @@ Page({
         })
     },
     //查询菜品接口
-    menuLsit:function(data){
+    menuLsit: function (data) {
         var that = this;
         wx.request({
             url: app.globalData.adminAddress + '/applet_customer/getGoodsList',
             data: data,
             method: "GET",
-            header: { 'content-type': 'application/x-www-form-urlencoded'},
+            header: { 'content-type': 'application/x-www-form-urlencoded' },
             success: function (res) {
                 // console.log('菜品接口')
                 // console.log(res)
@@ -663,7 +1059,7 @@ Page({
                 let menusdata = res.data.data;
                 // console.log('menusdata');
                 // console.log(menusdata);
-                for (var i = 0; i < menusdata.length; i++) {                    
+                for (var i = 0; i < menusdata.length; i++) {
                     for (var j = 0; j < menusdata[i].goodses.length; j++) {
                         menusdata[i].goodses[j].count = 0;      //给数组加上数量
                         // console.log(j)
@@ -676,9 +1072,11 @@ Page({
                         }
                     }
                 }
-               
-                //给第一个菜品分类加上On类名
-                menusdata[0].curClass = "on";
+
+                if (menusdata[0].curClass != undefined){
+                    //给第一个菜品分类加上On类名
+                    menusdata[0].curClass = "on";
+                } 
                 wx.hideLoading()
                 that.setData({
                     menus: menusdata,

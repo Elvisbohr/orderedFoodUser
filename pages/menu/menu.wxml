@@ -82,7 +82,7 @@
                             <!-- <text class="cart-item-yh-price">优惠前价格￥{{total.money}}</text> -->
                         </view>
                         <view class="cart-tab-item">
-                            <navigator url="../settle/settle?title=navigate" open-type="navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</navigator>
+                            <view bindtap="menuok" open-type="navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</view>
                         </view>
                     </view>
                     <!--下拉之后显示箭头-->
@@ -92,30 +92,69 @@
                         </view>
                         <!--已点餐品-->
                         <view class="shopmain">
-                            <block wx:for="{{total.list}}">                            
-                                <view class="shopList">
-                                    <view class="shopLeft">
-                                        <view class="shopName">{{item.name}}</view>
-                                        <view class="shopMoney">
-                                            <text class="yyuan">¥</text>{{item.price}}</view>
-                                    </view>
-                                    <view class="shopRight">
-                                        <view class="dish-item-count" style="">
+                            <block wx:for="{{total.list}}">
+                                <block wx:if="{{!item.standard}}">
+                                    <view class="shopList">
+                                        <view class="shopLeft">
+                                            <view class="shopName">{{item.name}}</view>
+                                            <!-- <view class="shopMoney">
+                                                <text class="yyuan">¥</text>{{item.price}}
+                                            </view> -->
 
-                                            <view class="dish-item-tab">
-                                                <view hidden="{{item.count == 0}}" class="dish-item-count-minus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" bindtap="minusCount">
-                                                    <image class="image" src="../../images/countMinus.png" />
+                                        </view>
+                                        <view class="shopRight">
+                                            <view class="shopMoney">
+                                                <text class="yyuan">¥</text>{{item.price}}
+                                            </view>
+                                            <view class="dish-item-count" style="">
+                                                <view class="dish-item-tab">
+                                                    <view hidden="{{item.count == 0}}" class="dish-item-count-minus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" bindtap="minusCount">
+                                                        <image class="image" src="../../images/countMinus.png" />
+                                                    </view>
                                                 </view>
-                                            </view>
-                                            <view class="dish-item-count-text dish-item-tab">
-                                                <text hidden="{{item.count == 0}}">{{item.count}}</text>
-                                            </view>
-                                            <view class="dish-item-count-plus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" bindtap="addCount">
-                                                <image class="image" src="../../images/countSelAdd.png" />
+                                                <view class="dish-item-count-text dish-item-tab">
+                                                    <text hidden="{{item.count == 0}}">{{item.count}}</text>
+                                                </view>
+                                                <view class="dish-item-count-plus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" bindtap="addCount">
+                                                    <image class="image" src="../../images/countSelAdd.png" />
+                                                </view>
                                             </view>
                                         </view>
                                     </view>
-                                </view>
+                                </block>
+                                <block wx:else>
+                                    <block wx:for="{{item.standard}}" wx:for-item="sItem">
+                                        <view class="shopList">
+                                            <view class="shopLeft">
+                                                <view class="shopName">{{item.name}}</view>
+                                                <!-- <view class="shopMoney">
+                                                <text class="yyuan">¥</text>{{item.price}}
+                                            </view> -->
+                                                <view class="spec">
+                                                    ({{sItem.specifications.name}}) ({{sItem.flavors.name}})
+                                                </view>
+                                            </view>
+                                            <view class="shopRight">
+                                                <view class="shopMoney">
+                                                    <text class="yyuan">¥</text>{{sItem.specifications.price}}
+                                                </view>
+                                                <view class="dish-item-count" style="">
+                                                    <view class="dish-item-tab">
+                                                        <view hidden="{{sItem.count == 0}}" class="dish-item-count-minus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" data-id-str="{{sItem.idStr}}" bindtap="minusCount">
+                                                            <image class="image" src="../../images/countMinus.png" />
+                                                        </view>
+                                                    </view>
+                                                    <view class="dish-item-count-text dish-item-tab">
+                                                        <text hidden="{{item.count == 0}}">{{sItem.count}}</text>
+                                                    </view>
+                                                    <view class="dish-item-count-plus" data-cid="{{item.id}}" data-index="{{index}}" data-type-index="{{item.typeIndex}}" data-id-str="{{sItem.idStr}}" bindtap="addCount">
+                                                        <image class="image" src="../../images/countSelAdd.png" />
+                                                    </view>
+                                                </view>
+                                            </view>
+                                        </view>
+                                    </block>
+                                </block>
                             </block>
                         </view>
                     </view>
@@ -157,17 +196,17 @@
                                                 </view>
                                             </view>
                                             <view class="dish-item-count" style="">
-                                                 <view class="dish-item-msg1" wx:if="{{menu.specifications.length == 0}}"> 
-                                                <!-- <view class="dish-item-msg1"> -->
+                                                <view class="dish-item-msg1" wx:if="{{menu.specifications.length == 0}}">
+                                                    <!-- <view class="dish-item-msg1"> -->
                                                     <view class="dish-item-tab">
-                                                        <view hidden="{{menu.count == 0}}" class="dish-item-count-minus" data-id="{{menu.id}}" data-cid="{{menu.id}}" bindtap="minusCount">
+                                                        <view hidden="{{menu.count == 0}}" class="dish-item-count-minus" data-id="{{menu.id}}" data-index="{{index}}" data-cid="{{menu.id}}" bindtap="minusCount">
                                                             <image class="image" src="../../images/countMinus.png" />
                                                         </view>
                                                     </view>
                                                     <view class="dish-item-count-text dish-item-tab">
                                                         <text hidden="{{menu.count == 0}}">{{menu.count}}</text>
                                                     </view>
-                                                    <view class="dish-item-count-plus" data-id="{{menu.id}}" data-cid="{{menu.id}}" bindtap="addCount">
+                                                    <view class="dish-item-count-plus" data-id="{{menu.id}}" data-cid="{{menu.id}}"  data-types="top"  bindtap="addCount">
                                                         <image class="image" src="../../images/countSelAdd.png" />
                                                     </view>
                                                 </view>
@@ -302,8 +341,8 @@
                 <view class="sfL">
                     ¥ <text>{{isPic}}</text>
                     <block>
-                        <text class="sflMsg" wx:if="{{isspecname != null}}">({{isspecname}})</text>
-                        <text class="sflMsg" wx:if="{{istastename != undefind}}">({{istastename}})</text>
+                        <text class="sflMsg" wx:if="{{isspecname != undefind && isspecname != ''}}">({{isspecname}})</text>
+                        <text class="sflMsg" wx:if="{{istastename != undefind && istastename != ''}}">({{istastename}})</text>
                     </block>
                 </view>
                 <view class="sfR" bindtap="shopcar">

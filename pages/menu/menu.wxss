@@ -488,12 +488,25 @@ page, .pages {
 
 .shopLeft {
   padding-left: 30rpx;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
 }
-
+.shopRight{
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
 .shopName {
-  font-size: 28rpx;
+  font-size: 34rpx;
+  color: #666666;
 }
-
+.spec{
+    font-size: 24rpx;
+    color: #666666;
+}
 .shopMoney {
   font-size: 40rpx;
   color: #e4333d;
@@ -507,7 +520,7 @@ page, .pages {
   display: flex;
   align-items: center;
   font-size: 26rpx;
-  padding: 20rpx 0 0 10rpx;
+  padding: 0 0 0 10rpx;
 }
 
 .dish-item-right {

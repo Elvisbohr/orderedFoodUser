@@ -37,6 +37,28 @@ page,.pages{
   justify-content: space-between;
   background: #fff;
 }
+.foodname{
+    width: 25%;
+    /* text-align: center; */
+    flex-shrink: 0;
+    text-overflow: clip;
+}
+.foodbz{
+    width: 55%;
+    /* text-align: center; */
+    flex-shrink: 0;
+
+}
+.foodpart{
+    width: 10%;
+    text-align: center;
+    flex-shrink: 0;
+}
+.foodmoney{
+    width: 10%;
+    text-align: center;
+    flex-shrink: 0;
+}
 /*优惠活动*/
 .activity{
   display: -webkit-flex;
@@ -47,10 +69,7 @@ page,.pages{
   background: #fff;
   padding-top: 36rpx;
 }
-.foodbz{
-  width:35%;
-  flex-shrink:0;
-}
+
 .totalL{
   display: -webkit-flex;
   display: flex;
@@ -119,6 +138,20 @@ page,.pages{
 .actlistR{
   color: #d93035;
 }
+.actSelect{
+    width: 100%;
+    padding: 0 38rpx 15rpx;
+    font-size: 24rpx;
+    box-sizing: border-box;
+    color: #808080;
+}
+.actSelect .actSelectPicker{
+    font-size: 28rpx;
+    width: 100%;
+    text-align: center;
+    color: #5a5a5a;
+}
+
 /*就餐方式*/
 .waylist {
   background: #fff;

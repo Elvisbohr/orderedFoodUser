@@ -1,125 +1,156 @@
 <!--pages/settle/settle.wxml-->
 <view class="pages">
-  <!--头部-->
-  <view class="settleHead">
-    {{shopname}}
-  </view>
-  <!--头部End-->
-  <!--已选菜品-->
-  <view class="foodCont {{upmore?'':'on'}}">
-    <block>
-      <view class="foodList">
-        <view class="foodname">麻婆豆腐</view>
-        <view class="foodbz"></view>
-        <view class="foodpart">1</view>
-        <view class="foodmoney">¥12</view>
-      </view>
-      <view class="foodList">
-        <view class="foodname">麻婆豆腐</view>
-        <view class="foodbz"></view>
-        <view class="foodpart">1</view>
-        <view class="foodmoney">¥12</view>
-      </view>
-      <view class="foodList">
-        <view class="foodname">麻婆豆腐</view>
-        <view class="foodbz">(大)</view>
-        <view class="foodpart">1</view>
-        <view class="foodmoney">¥12</view>
-      </view>
-    </block>
-  </view>
-  <!--已选菜品End-->
-  <!--优惠活动-->
-  <view class="activity">
-    <view class="actl">优惠活动:</view>
-    <image bindtap="upmore" class="actr {{upmore?'':'on'}}" mode="widthFix" src="../../images/xiaj.png"></image>
-  </view>
-  <view class="actMain">
-    <view class="actList">
-      <view class="actlistL"><text class="actZ">折</text>店铺折扣</view>
-      <view class="actlistR">-¥ <text>5</text></view>  
+    <!--头部-->
+    <view class="settleHead">
+        {{shopname}}
     </view>
-    <view class="actList">
-      <view class="actlistL"><text class="actD">¥</text>代金券</view>
-      <view class="actlistR">-¥ <text>5</text></view>  
+    <!--头部End-->
+    <!--已选菜品-->
+    <view class="foodCont {{upmore?'':'on'}}">
+        <block wx:for="{{submitshop.list}}">
+            <block wx:if="{{!item.standard}}">
+                <view class="foodList">
+                    <view class="foodname">{{item.name}}</view>
+                    <view class="foodbz"></view>
+                    <view class="foodpart">{{item.count}}</view>
+                    <view class="foodmoney">¥ {{item.price}}</view>
+                </view>
+            </block>
+            <block wx:else>
+                <block wx:for="{{item.standard}}" wx:for-item="sItem">
+                    <view class="foodList">
+                        <view class="foodname">{{item.name}}</view>
+                        <view class="foodbz">({{sItem.specifications.name}}) ({{sItem.flavors.name}})</view>
+                        <view class="foodpart">{{sItem.count}}</view>
+                        <view class="foodmoney">¥ {{sItem.specifications.price}}</view>
+                    </view>
+                </block>
+            </block>
+
+        </block>
+        <block wx:if="{{!cirImg}}">
+            <view class="foodList">
+                <view class="foodname">餐盒费</view>
+
+                <view class="foodmoney">¥ {{allcnaheprice}}</view>
+            </view>
+        </block>
     </view>
-    <view class="actList">
-      <view class="actlistL"><text class="actJ">减</text>满减活动</view>
-      <view class="actlistR">-¥ <text>5</text></view>  
+    <!--已选菜品End-->
+    <!--优惠活动-->
+    <view class="activity">
+        <view class="actl">优惠活动:</view>
+        <image bindtap="upmore" class="actr {{upmore?'':'on'}}" mode="widthFix" src="../../images/xiaj.png"></image>
     </view>
-  </view>
-  <view class="total">
-    <view class="totalL">
-      <view class="ml10">合计:</view>
-      <view class="">优惠:</view>
-    </view>
-    <view class="">实付:¥</view>
-  </view>
-  <!--优惠活动End-->
-  <form bindsubmit="submitOrder" report-submit="true">
-    <!--就餐方式-->
-    <view class=" waylist">
-      <view class="title">就餐方式</view>
-      <view class="way">
-        <view class="ts {{circle?'':'on'}}" bindtap="waytach" data-types="DiningWay">
-          <view class="pic">
-            <image src="{{circle?'../../images/ts2.png':'../../images/ts.png'}}" mode="widthFix"></image>
-          </view>
-          <view class="text">
-            堂食
-          </view>
+
+    <!-- <view class="actMain">
+        <view class="actList">
+            <view class="actlistL"><text class="actZ">折</text>店铺折扣</view>
+            <view class="actlistR">-¥ <text>5</text></view>
         </view>
-        <view class="wd {{cirImg?'':'on'}}" bindtap="waytach" data-types="DiningWay">
-          <view class="pic">
-            <image src="{{cirImg?'../../images/wd.png':'../../images/wd2.png'}}" mode="widthFix"></image>
-          </view>
-          <view class="text">
-            外带
-          </view>
+        <view class="actList">
+            <view class="actlistL"><text class="actD">¥</text>代金券</view>
+            <view class="actlistR">-¥ <text>5</text></view>
         </view>
-      </view>
-      <!--桌号-->
-      <view class="jslist" wx:if="{{cirImg}}">
-        <view class="lxL">桌号</view>
-        <input class="lxR" name="桌号" placeholder="所在桌号"/>
-      </view>
-      <!--桌号End-->
-    </view>
-    <!--就餐方式End-->
-    <!--联系方式-->
-    <view class="jslist">
-      <view class="lxL">联系电话 <text>*</text></view>
-      <input class="lxR" name="telphone" />
-    </view>
-    <!--联系方式End-->
-    <!--取餐时间-->
-    <view class="jslist">
-      <view class="lxL">取餐时间</view>
-      <view class="lxR">
-        <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
-          <view class="picker">
-            {{time}}
-          </view>
+        <view class="actList">
+            <view class="actlistL"><text class="actJ">减</text>满减活动</view>
+            <view class="actlistR">-¥ <text>5</text></view>
+        </view>
+    </view> -->
+    <!-- 选择优惠活动 -->
+    <view class="actMain">
+        <view class="actSelect">请选择参加的活动:</view>
+        <picker bindchange="bindActivityChange" class="actSelect" range-key="preferentialDes" range="{{discount}}" value="{{actIndex}}">
+            <view class="actSelectPicker">
+                {{discount[actIndex].preferentialDes}}
+            </view>
         </picker>
-      </view>
+        <view class="actSelect">可使用的代金券:</view>
+        <picker bindchange="bindCouponsChange" class="actSelect" range-key="preferentialDes" range="{{coupons}}" value="{{couIndex}}">
+            <view class="actSelectPicker">
+                {{coupons[couIndex].preferentialDes}}
+            </view>
+        </picker>
     </view>
-    <!--取餐时间End-->
-    <!--备注-->
-    <view class="jslist">
-      <view class="lxL">备注</view>
-      <input class="lxR" name="note" placeholder="可不填写" />
+    <!-- 选择优惠活动End -->
+    <view class="total">
+        <view class="totalL">
+            <view class="ml10">合计: <text> {{submitshop.price}}</text></view>
+            <view class="">优惠: <text>{{upActivity.preferential}}</text></view>
+        </view>
+        <view class="">实付:¥</view>
     </view>
-    <!--联系方式End-->
-    <!--底部浮动-->
-    <view class="cart-tab-wrp">
-      <view class="cart-item-total cart-tab-item">
-        待支付
-        <text class="cart-item-total-price">￥{{submitshop.money}}</text>
-      </view>
-      <view class="cart-tab-item">
-        <button form-type="submit" class="cart-tab-item-btn">提交订单</button>
-      </view>
-    </view>
-    <!--底部浮动End-->
-  </form>
+    <!--优惠活动End-->
+    <form bindsubmit="submitOrder" report-submit="true">
+        <!--就餐方式-->
+        <view class=" waylist">
+            <view class="title">就餐方式</view>
+            <view class="way">
+                <view class="ts {{circle?'':'on'}}" bindtap="waytach" data-types="DiningWay">
+                    <view class="pic">
+                        <image src="{{circle?'../../images/ts2.png':'../../images/ts.png'}}" mode="widthFix"></image>
+                    </view>
+                    <view class="text">
+                        堂食
+                    </view>
+                </view>
+                <view class="wd {{cirImg?'':'on'}}" bindtap="waytach" data-types="invoice">
+                    <view class="pic">
+                        <image src="{{cirImg?'../../images/wd.png':'../../images/wd2.png'}}" mode="widthFix"></image>
+                    </view>
+                    <view class="text">
+                        外带
+                    </view>
+                </view>
+            </view>
+            <!--桌号-->
+            <view class="jslist" wx:if="{{cirImg}}">
+                <view class="lxL">桌号</view>
+                <input class="lxR" name="cirnum" placeholder="所在桌号" value="{{cirnum}}" />
+            </view>
+            <!--桌号End-->
+            <!--餐盒费提示-->
+            <view class="jslist" wx:if="{{!cirImg}}">
+                <view class="">需支付餐盒费</view>
+
+            </view>
+            <!--餐盒费提示End-->
+        </view>
+        <!--就餐方式End-->
+        <!--联系方式-->
+        <view class="jslist">
+            <view class="lxL">联系电话 <text>*</text></view>
+            <input class="lxR" name="telphone" value="{{telPhone}}" />
+        </view>
+        <!--联系方式End-->
+        <!--取餐时间-->
+        <view class="jslist">
+            <view class="lxL">取餐时间</view>
+            <view class="lxR">
+                <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+                    <view class="picker">
+                        {{time}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <!--取餐时间End-->
+        <!--备注-->
+        <view class="jslist">
+            <view class="lxL">备注</view>
+            <input class="lxR" name="note" placeholder="可不填写" />
+        </view>
+        <!--联系方式End-->
+        <!--底部浮动-->
+        <view class="cart-tab-wrp">
+            <view class="cart-item-total cart-tab-item">
+                待支付
+                <text class="cart-item-total-price">￥{{upActivity.payMoney}}</text>
+            </view>
+            <view class="cart-tab-item">
+                <button form-type="submit" class="cart-tab-item-btn">提交订单</button>
+            </view>
+        </view>
+        <!--底部浮动End-->
+    </form>
 </view>

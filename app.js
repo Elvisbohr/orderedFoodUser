@@ -4,8 +4,8 @@ App({
   globalData: {
     total: {},
     // adminAddress: "https://ad.kulizhi.com/ydc",
-    // adminAddress: "http://114.215.31.133:8081/api",
-    adminAddress: "http://192.168.1.129:8080/api",
+    adminAddress: "http://114.215.31.133:8081/api",
+    // adminAddress: "http://192.168.1.129:8080/api",
     appid: 'wx923af279b0388603',
     secret: '81beb1a470654ec92ce7fc27f14009b5',
     mealTime: "",
