@@ -7,12 +7,12 @@ Page({
         shopname: '天一阁',  //店铺名
         circle: false,   //就餐方式
         cirImg: true,    //就餐方式
-        time: '',   //取餐时间
+        takeFoodtime: '',   //取餐时间
 
         discount: [],
         actIndex: 0,        //选中的优惠活动下标
         couIndex: 0,        //选中的代金券活动的下标
-        
+        waytachType: 1,        //上传接口(就餐类型 1堂食 2外带)
     },
 
     onLoad: function (options) {
@@ -32,7 +32,7 @@ Page({
         var m = date.getMinutes();
         console.log("当前时间：" + h + ":" + m);
         that.setData({
-            time: h + ":" + m,
+            takeFoodtime: h + ":" + m,
             shopName: shopName,
         })
         //获取本地缓存里数据
@@ -44,7 +44,7 @@ Page({
                 console.log(123123)
                 console.log(submitshop)
 
-                // 算外卖费
+                // 算外卖费并往上传的数据里赋值
                 var cnaheprice1 = 0,    //声明单个外卖费
                     cnaheprice2 = 0,
                     count = 0,  //声明总数量
@@ -52,21 +52,26 @@ Page({
                     count2 = 0,  //声明有规格数量
                     allcnaheprice = 0;  //声明总外卖费用
                 for (var i = 0; i < submitshop.list.length; i++) {  //循环列表累加
+                    
                     // 判断是否是有规格菜品              
                     if (submitshop.list[i].standard == undefined){     //无规格的菜品                                         
                         count1 += submitshop.list[i].count;         //无规格的数量
-                        cnaheprice1 = submitshop.list[i].boxPrice;            //无规格的餐盒费         
+                        cnaheprice1 = submitshop.list[i].boxPrice;            //无规格的餐盒费                          
+                 
                                           
                     }else{                                        //   有规格的菜品
                         for (var j = 0; j < submitshop.list[i].standard.length; j++){
                             count2 += submitshop.list[i].standard[j].count;     //遍历出有规格的数量加起来
+                            // upgoods.boxPrice = submitshop.list[i].boxPrice;  
                         }   
                         cnaheprice2 = submitshop.list[i].boxPrice;      //有规格的餐盒费                                                                                   
-                    }                                       
+                                              
+                    }
+                                                     
                 }
                 
                 allcnaheprice = (count1 * cnaheprice1) + (count2 * cnaheprice2)     //总餐盒费
-                // allcnaheprice += (cnaheprice * count) 
+               
                 that.setData({
                     allcnaheprice: allcnaheprice,
                     submitshop: submitshop,
@@ -103,6 +108,7 @@ Page({
                 circle: (!that.data.circle),
                 cirImg: (!that.data.cirImg),
                 upActivity: upActivity,
+                waytachType: 1,     //上传接口(就餐类型 1堂食 2外带)
             });
         } else if (types === 'invoice') {
             console.log('外卖')
@@ -112,13 +118,14 @@ Page({
                 upActivity: upActivity,
                 circle: true,
                 cirImg: false,
+                waytachType: 2,     //上传接口(就餐类型 1堂食 2外带)
             });
         }
     },
     // 就餐时间
     bindTimeChange: function (e) {
         this.setData({
-            time: e.detail.value
+            takeFoodtime: e.detail.value
         })
     },
     //选择优惠活动
@@ -126,32 +133,38 @@ Page({
         var that = this;
         var index = e.detail.value; 
         var preferentialType = that.data.discount[index].preferentialType;  //折扣和满减选中项(传回接口)	
-        this.setData({
+        console.log('preferentialType')
+        console.log(e)
+        console.log(index)
+        // console.log(preferentialType)
+        that.setData({
             actIndex: e.detail.value
         })
         //使用用户优惠活动接口
         var actdata = {};
-        actdata.openid = app.globalData.openId;
-        actdata.shopId = that.data.shopid;
-        actdata.total = that.data.submitshop.price;
-        actdata.discount_money_Type = preferentialType;
-        that.upActivity(actdata);
+        actdata.openid = app.globalData.openId;     //用户openid
+        actdata.shopId = that.data.shopid;          //商铺id
+        actdata.total = that.data.submitshop.price; //订单总价
+        actdata.discount_money_Type = preferentialType; //优惠活动当前选中项
+        actdata.couponId= that.data.tachcouId;  //默认代金券id
+        // that.upActivity(actdata);
     },
     //选择代金券
     bindCouponsChange:function(e){
         var that = this;
         var index = e.detail.value;
         var couponId = this.data.discount[index].id;
-        console.log(couponId)
+        // console.log(couponId)
         this.setData({
             couIndex: e.detail.value
         }) 
         //使用用户优惠活动接口
         var actdata = {};
-        actdata.openid = app.globalData.openId;
-        actdata.shopId = that.data.shopid;
-        actdata.total = that.data.submitshop.price
-        actdata.couponId = couponId
+        actdata.openid = app.globalData.openId;     //用户openid
+        actdata.shopId = that.data.shopid;          //商铺id
+        actdata.total = that.data.submitshop.price  //订单总价
+        actdata.couponId = couponId         //代金券当前选中项
+        actdata.discount_money_Type = that.data.tachdisId //默认优惠活动id
         that.upActivity(actdata);
     },
     //获取用户优惠活动接口
@@ -175,16 +188,18 @@ Page({
                 //外卖的总计
                 var wmprice = (Number(upActivity.payMoney) + Number(allcnaheprice)).toFixed(2);    //外卖的总价
                 //判断如果是第一次进入则调用接口默认最优选项
+                var tachdisId = upActivity.discount_moneyoff_seled  //优惠活动默认id
+                var tachcouId = upActivity.coupons_seled  //代金券默认id
                 if (data.discount_money_Type == undefined && data.couponId == undefined){  
                     // 初次调取优惠信息接口
                     //找接口返回的匹配id的下标
                     console.log('找到默认最优优惠选项')
-                    var tachdisId = upActivity.discount_moneyoff_seled  //优惠活动默认id
+                    
                     var d = discount.findIndex(function (v) {                       
                         return v.preferentialType == tachdisId;
                     })
                     var actIndex = d;
-                    var tachcouId = upActivity.coupons_seled  //优惠活动默认id
+                    
                     var c = coupons.findIndex(function (v) {
                         return v.id == tachcouId;
                     })
@@ -194,14 +209,19 @@ Page({
                         couIndex: couIndex,
                     })
                 }                
-                
+                var preferentials = [];     //声明要上传接口所用数组
+                preferentials.push(discount[actIndex])      //所选优惠数组
+                preferentials.push(coupons[couIndex])       //所选代金券数组
+                console.log(preferentials)
                 that.setData({
+                    tachdisId: tachdisId,   //优惠活动默认id
+                    tachcouId: tachcouId,   //代金券默认id
                     upActivity: upActivity,     //所有优惠数组 
                     discount: discount,         //优惠数组
                     coupons: coupons,           //代金券数组
                     tsprice: tsprice,           //堂食总金额
                     wmprice: wmprice,           //外带总金额
-                   
+                    preferentials: preferentials, //声明要上传接口所用数组
                 });
             },
             fail: function () {
@@ -218,7 +238,7 @@ Page({
     },
     // 提交订单
     submitOrder:function(e){
-        console.log(e)
+        // console.log(e)
         var that = this;
         var result = this.checkPhone(e.detail.value.telphone);  //判断手机号是否正确
         var cirnum = e.detail.value.cirnum;     //填写的桌号
@@ -235,17 +255,79 @@ Page({
                 mask: true
             });
         }
+
+        var goods = [];     //声明需要上传的数组
+        var submitshop = that.data.submitshop   //声明已购菜品总数组
+        for (var i = 0; i < submitshop.list.length; i++) {  //循环列表累加
+            
+            // 判断是否是有规格菜品              
+            if (submitshop.list[i].standard == undefined) {     //无规格的菜品    
+                var upgoods = {}; //声明上传数组的对象                                                                    
+                //无规格菜品压入接口数组
+                upgoods.boxPrice = submitshop.list[i].boxPrice;       //餐盒费
+                upgoods.goodsName = submitshop.list[i].name;       //菜品名称
+                upgoods.goodsId = submitshop.list[i].id;     //菜品Id
+                upgoods.num = submitshop.list[i].count;  //菜品数量
+                upgoods.price = submitshop.list[i].price;    //菜品单价
+                goods.push(upgoods) 
+            } else {                                        //   有规格的菜品
+                for (var j = 0; j < submitshop.list[i].standard.length; j++) {              
+                    console.log(j)    
+                    var upgoods = {}; //声明上传数组的对象
+                    upgoods.boxPrice = submitshop.list[i].boxPrice; //餐盒费  
+                    upgoods.goodsName = submitshop.list[i].name;       //菜品名称                    
+                    upgoods.goodsFlavorId = submitshop.list[i].standard[j].flavors.id;   //菜品口味id
+                    upgoods.goodsFlavorName = submitshop.list[i].standard[j].flavors.name;   //菜品口味名称
+                    upgoods.goodsId = submitshop.list[i].id;    //菜品Id
+                    upgoods.goodsSpecificationId = submitshop.list[i].standard[j].specifications.id; //菜品规格Id
+                    upgoods.goodsSpecificationName = submitshop.list[i].standard[j].specifications.name; //菜品规格名称
+                    upgoods.num = submitshop.list[i].standard[j].count;  //菜品数量
+                    upgoods.price = submitshop.list[i].standard[j].specifications.price //菜品单价.
+                    goods.push(upgoods) 
+                }
+                                                                                            
+
+            }
+            
+            that.setData({
+                goods:goods,
+            })
+
+        }
+
+
+
+
         var submitData = {}; //声明上传接口数组
-        data.comments = note;   //订单备注
-        data.contactNumber = telphone;   //联系电话
-        data.openid = app.globalData.openId; //用户openid
-        data.payAmount = that.data.upActivity.payMoney;  //支付金额
-        data.preferMoney = that.data.upActivity.preferential; //优惠金额
-        data.shopId = that.data.shopid;  //商铺Id
-        data.shopName = that.data.shopName; //店铺名称
-        data.tableNum = that.data.cirnum;   //餐桌号
-
-
-
+        submitData.comments = note;   //订单备注
+        submitData.contactNumber = telphone;   //联系电话
+        submitData.openid = app.globalData.openId; //用户openid
+        submitData.payAmount = that.data.upActivity.payMoney;  //支付金额
+        submitData.preferMoney = that.data.upActivity.preferential; //优惠金额
+        submitData.shopId = that.data.shopid;  //商铺Id
+        submitData.shopName = that.data.shopName; //店铺名称
+        submitData.tableNum = cirnum;   //餐桌号
+        submitData.takeFoodtime = that.data.takeFoodtime;    //取餐时间
+        submitData.total = that.data.submitshop.price;    //订单总额
+        submitData.preferentials = that.data.preferentials;   //订单优惠列表
+        submitData.type = that.data.waytachType;     //就餐方式
+        submitData.goods = that.data.goods;
+        console.log(submitData)
+        that.upLoadMenu(submitData)
+    },
+    upLoadMenu:function(data){
+      var that = this;
+      wx.request({
+        url: app.globalData.adminAddress + '/applet_customer/submitOrder',
+        data: data,
+        method: "POST",
+        // header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          console.log('提交成功')
+        },
+        fail: function () {
+          wx.showLoading('请求数据失败');
+        }
+      })
     }
 })
