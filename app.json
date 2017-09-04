@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages":["pages/orderparticulars/orderparticulars",
     "pages/index/index",
     "pages/mine/mine",
     "pages/membercenter/membercenter",
@@ -9,7 +9,7 @@
     "pages/collect/collect",
     "pages/orderform/orderform",
     "pages/coupon/coupon",
-    "pages/orderparticulars/orderparticulars",
+    
     "pages/details/details",
     "pages/userName/userName",
     "pages/userBirthday/userBirthday",

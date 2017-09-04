@@ -69,12 +69,13 @@ Page({
                     }
                                                      
                 }
-                
+                var totals = submitshop.price
                 allcnaheprice = (count1 * cnaheprice1) + (count2 * cnaheprice2)     //总餐盒费
                
                 that.setData({
                     allcnaheprice: allcnaheprice,
                     submitshop: submitshop,
+                    totals: totals,   //接口上传需要的合计
                     shopid: options.shopId,
                 
                 });
@@ -85,7 +86,16 @@ Page({
                 actdata.total = submitshop.price
                 that.upActivity(actdata);
             },
-        })
+        });
+        wx.getStorage({
+          key: 'userInfo',
+          success: function (res) {
+            console.log(res.data)
+            that.setData({
+              customerName: res.data.nickName
+            })
+          }
+        });
        
 
     },
@@ -104,20 +114,24 @@ Page({
         if (types === 'DiningWay') {
             console.log('堂食')
             upActivity.payMoney = (Number(that.data.tsprice)); 
+            var totals = (Number(that.data.submitshop.price)).toFixed(2)
             that.setData({
                 circle: (!that.data.circle),
                 cirImg: (!that.data.cirImg),
                 upActivity: upActivity,
+                totals: totals,   //合计价格
                 waytachType: 1,     //上传接口(就餐类型 1堂食 2外带)
             });
         } else if (types === 'invoice') {
             console.log('外卖')
             upActivity.payMoney = that.data.wmprice;
+            var totals = (Number(that.data.submitshop.price) + Number(that.data.allcnaheprice)).toFixed(2)
             that.setData({
                 invoice: (!that.data.invoice),
                 upActivity: upActivity,
                 circle: true,
                 cirImg: false,
+                totals: totals,   //合计价格
                 waytachType: 2,     //上传接口(就餐类型 1堂食 2外带)
             });
         }
@@ -207,6 +221,7 @@ Page({
                     that.setData({
                         actIndex: actIndex,
                         couIndex: couIndex,
+                        allcnaheprice:allcnaheprice,
                     })
                 }                
                 var preferentials = [];     //声明要上传接口所用数组
@@ -244,17 +259,7 @@ Page({
         var cirnum = e.detail.value.cirnum;     //填写的桌号
         var note = e.detail.value.note;         //填写备注
         var telphone = e.detail.value.telphone; //填写手机号
-        if (e.detail.value.telphone === "") {
-            wx.showToast({
-                title: '请填写手机号码',
-                mask: true
-            });
-        } else if (!result) {
-            wx.showToast({
-                title: '请填写正确的手机号码',
-                mask: true
-            });
-        }
+        
 
         var goods = [];     //声明需要上传的数组
         var submitshop = that.data.submitshop   //声明已购菜品总数组
@@ -294,26 +299,42 @@ Page({
             })
 
         }
+        if (e.detail.value.telphone === "") {
+          wx.showToast({
+            title: '请填写手机号码',
+            mask: true
+          });
+        } else if (!result) {
+          wx.showToast({
+            title: '请填写正确的手机号码',
+            mask: true
+          });
+        }else{
+          
+          var submitData = {}; //声明上传接口数组
+          submitData.comments = note;   //订单备注
+          submitData.contactNumber = telphone;   //联系电话
+          submitData.openid = app.globalData.openId; //用户openid
+          submitData.payAmount = that.data.upActivity.payMoney;  //支付金额
+          submitData.preferMoney = that.data.upActivity.preferential; //优惠金额
+          submitData.shopId = that.data.shopid;  //商铺Id
+          submitData.shopName = that.data.shopName; //店铺名称
+          submitData.tableNum = cirnum;   //餐桌号
+          submitData.takeFoodtime = that.data.takeFoodtime;    //取餐时间
+          // submitData.total = that.data.submitshop.price;    //订单总额
+          submitData.total = that.data.totals;    //订单总额
+          submitData.preferentials = that.data.preferentials;   //订单优惠列表
+          submitData.type = that.data.waytachType;     //就餐方式
+          submitData.boxAmount = that.data.allcnaheprice   // 总餐盒费
+          submitData.customerName = that.data.customerName;    //该用户的微信名字
+          submitData.goods = that.data.goods;
+          console.log(submitData)
+          that.upLoadMenu(submitData)
+        }
 
 
 
-
-        var submitData = {}; //声明上传接口数组
-        submitData.comments = note;   //订单备注
-        submitData.contactNumber = telphone;   //联系电话
-        submitData.openid = app.globalData.openId; //用户openid
-        submitData.payAmount = that.data.upActivity.payMoney;  //支付金额
-        submitData.preferMoney = that.data.upActivity.preferential; //优惠金额
-        submitData.shopId = that.data.shopid;  //商铺Id
-        submitData.shopName = that.data.shopName; //店铺名称
-        submitData.tableNum = cirnum;   //餐桌号
-        submitData.takeFoodtime = that.data.takeFoodtime;    //取餐时间
-        submitData.total = that.data.submitshop.price;    //订单总额
-        submitData.preferentials = that.data.preferentials;   //订单优惠列表
-        submitData.type = that.data.waytachType;     //就餐方式
-        submitData.goods = that.data.goods;
-        console.log(submitData)
-        that.upLoadMenu(submitData)
+       
     },
     upLoadMenu:function(data){
       var that = this;

@@ -108,7 +108,7 @@ page,.pages{
   flex-shrink:0;
 }
 .partDz{
-  width: 65%;
+  width: 80%;
 }
 .partR{
   width: 20rpx;

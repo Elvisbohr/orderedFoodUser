@@ -124,6 +124,7 @@ Page({
       }
     })
   },
+  //商铺列表接口
   getMerchantList: function (data) {
     console.log('商戶列表接口數據');
     var that = this;
@@ -167,8 +168,17 @@ Page({
       })
 
   },
-  onHide: function () {
-
-     
-  },
+  //跳转店铺
+  shopnav:function(e){
+    var that = this;
+    var merchants = that.data.merchants;    //获取data里的商铺接口数据
+    var index = e.currentTarget.dataset.index;  //获取点击的是啊哪个个
+    if (merchants[index].isOpen == 1){ //判断如果是营业中则跳转页面
+      wx.navigateTo({
+        url: '../menu/menu?id=' + merchants[index].id + '&name=' + merchants[index].shopName,
+        
+      })
+    }
+    
+  }
 })

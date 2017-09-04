@@ -76,7 +76,16 @@ Page({
         //获取店名存入全局
         // console.log(options.name)
         app.globalData.shopName = options.name;
-        // console.log(app.globalData.shopName)        
+        // console.log(app.globalData.shopName)
+        that.setData({
+          shopName : options.name
+        })
+        //查询是否有代金券
+        var queryChitData = []; //声明查询代金券接口需要传回data数据  
+        queryChitData.shopId = options.id // 商铺Id
+        queryChitData.openid = app.globalData.openId; //openid
+        that.queryChit(queryChitData) //查询代金券接口
+             
     },
     attention: function () { //点击后改变收藏状态
         var that = this;
@@ -829,15 +838,24 @@ Page({
     },
     menuok: function () {
         var that = this;
-        wx.setStorage({
+        if (that.data.total.price == 0){
+          wx.showToast({
+            title: '请先选择菜品',
+            icon: 'loading',
+            duration: 800
+          })
+        }else{
+          wx.setStorage({
             key: 'total',
             data: that.data.total,
             success: function () {
-                wx.navigateTo({
-                    url: '../settle/settle?shopId=' + that.data.shopId,
-                })
+              wx.navigateTo({
+                url: '../settle/settle?shopId=' + that.data.shopId,
+              })
             }
-        })
+          })
+        }
+        
     },
     onShow: function () {
         var that = this;
@@ -898,6 +916,10 @@ Page({
     //点击确认按钮之后是代金券变灰
     shitbut: function () {
         var that = this;
+        var grabCouponsData = [];
+        grabCouponsData.couponId = that.data.queryChit.id;
+        grabCouponsData.openid = app.globalData.openId;
+        that.grabCoupons(grabCouponsData)
         that.setData({
             chitR: false,
             chitMain: false,
@@ -932,8 +954,10 @@ Page({
             method: "GET",
             header: { 'content-type': 'application/x-www-form-urlencoded' },
             success: function (res) {
+              if(res.data.data == null){
+                console.log('该用户为游客')
+              }else{
                 // console.log('判断店铺是否已收藏接口')
-                // console.log(res)
                 if (res.data.data.isCollect) {
                     console.log('已收藏')
                     that.setData({
@@ -949,6 +973,7 @@ Page({
                         attention: 0,
                     })
                 }
+              };
             },
             fail: function () {
                 wx.showLoading('请求数据失败');
@@ -990,6 +1015,7 @@ Page({
             }
         })
     },
+    //获取接口信息(是否有活动)
     isActivity: function (data) {
         var that = this;
         wx.request({
@@ -998,12 +1024,17 @@ Page({
             method: "GET",
             header: { 'content-type': 'application/x-www-form-urlencoded' },
             success: function (res) {
-                // console.log('判断是否有优惠活动')
-                // console.log(res.data.data)
-                var activityIndex = res.data.data.num;
+                console.log('判断是否有优惠活动')
+                console.log(res.data.data)
+                var activityIndex = res.data.data.num;  //获取共有几个活动
+                var shopImg = res.data.data.shopImg //获取商铺头像
+                if (shopImg == null){ //判断是否有图片,没有给默认图片
+                  shopImg = '../../images/shopmode.png'
+                }
                 // console.log(activityIndex)
                 that.setData({
                     activityIndex: activityIndex,
+                    shopImg: shopImg,
                 })
                 //判断该店是否有{{代金券}}活动
                 if (res.data.data.coupon == '' || res.data.data.coupon == undefined) {
@@ -1057,8 +1088,13 @@ Page({
                 // console.log(res)
                 // 先把餐单里的数量变为0
                 let menusdata = res.data.data;
-                // console.log('menusdata');
-                // console.log(menusdata);
+                console.log('menusdata');
+                console.log(menusdata);
+                if (menusdata.length == 0){
+                  console.log('商家暂未上传菜品');                  
+                }else{
+
+                
                 for (var i = 0; i < menusdata.length; i++) {
                     for (var j = 0; j < menusdata[i].goodses.length; j++) {
                         menusdata[i].goodses[j].count = 0;      //给数组加上数量
@@ -1073,10 +1109,10 @@ Page({
                     }
                 }
 
-                if (menusdata[0].curClass != undefined){
+
                     //给第一个菜品分类加上On类名
                     menusdata[0].curClass = "on";
-                } 
+                }
                 wx.hideLoading()
                 that.setData({
                     menus: menusdata,
@@ -1086,5 +1122,80 @@ Page({
                 wx.showLoading('请求数据失败');
             }
         })
+    },
+    //拨打电话
+    callUp:function(){
+      var that = this;
+      var shopInfo = that.data.shopInfo;
+      var phone = shopInfo.telphone
+      wx.makePhoneCall({
+        phoneNumber: phone //仅为示例，并非真实的电话号码
+      })
+    },
+    //查看资质大图
+    patImg:function(e){
+      var that = this;
+      var current = '';
+      var urls = [];
+      var imgtype = e.currentTarget.dataset.img
+      if (imgtype == 'businessLicenseImg'){
+        current = that.data.shopInfo.businessLicenseImg;
+        urls = that.data.shopInfo.businessLicenseImg;
+      } else if (imgtype == 'licenceImg'){
+        current = that.data.shopInfo.licenceImg;
+        urls = that.data.shopInfo.licenceImg;
+      }
+      wx.previewImage({
+        current: current, // 当前显示图片的http链接
+        urls: urls // 需要预览的图片http链接列表
+      })
+    },
+    //查询是否有代金券
+    queryChit:function(data){
+      var that = this;
+      wx.request({
+        url: app.globalData.adminAddress + '/applet_customer/getShopCoupon',
+        data: data,
+        method: "GET",
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          console.log('查询代金券')
+          console.log(res)
+ 
+          if(res.data.data == null){
+            isQueryChit:false;
+            that.setData({
+              isQueryChit: false  //判断他是否有代金券
+            })
+          }else{
+            isQueryChit: true;
+            that.setData({
+              queryChit: res.data.data, //声明代金券数组
+              isQueryChit: true  //判断他是否有代金券
+            })
+          }
+         
+        },
+        fail: function () {
+          wx.showLoading('请求数据失败');
+        }
+      })
+    },
+    //抢券接口
+    grabCoupons:function(data){
+      var that = this;
+      wx.request({
+        url: app.globalData.adminAddress + '/applet_customer/grabCoupons',
+        data: data,
+        method: "POST",
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          console.log('抢券')
+          console.log(res)
+        },
+        fail: function () {
+          wx.showLoading('请求数据失败');
+        }
+      })
     }
 })

@@ -12,7 +12,7 @@
                 <view class="foodList">
                     <view class="foodname">{{item.name}}</view>
                     <view class="foodbz"></view>
-                    <view class="foodpart">{{item.count}}</view>
+                    <view class="foodpart">{{item.count}}份</view>
                     <view class="foodmoney">¥ {{item.price}}</view>
                 </view>
             </block>
@@ -21,7 +21,7 @@
                     <view class="foodList">
                         <view class="foodname">{{item.name}}</view>
                         <view class="foodbz">({{sItem.specifications.name}}) ({{sItem.flavors.name}})</view>
-                        <view class="foodpart">{{sItem.count}}</view>
+                        <view class="foodpart">{{sItem.count}}份</view>
                         <view class="foodmoney">¥ {{sItem.specifications.price}}</view>
                     </view>
                 </block>
@@ -43,20 +43,6 @@
         <image bindtap="upmore" class="actr {{upmore?'':'on'}}" mode="widthFix" src="../../images/xiaj.png"></image>
     </view>
 
-    <!-- <view class="actMain">
-        <view class="actList">
-            <view class="actlistL"><text class="actZ">折</text>店铺折扣</view>
-            <view class="actlistR">-¥ <text>5</text></view>
-        </view>
-        <view class="actList">
-            <view class="actlistL"><text class="actD">¥</text>代金券</view>
-            <view class="actlistR">-¥ <text>5</text></view>
-        </view>
-        <view class="actList">
-            <view class="actlistL"><text class="actJ">减</text>满减活动</view>
-            <view class="actlistR">-¥ <text>5</text></view>
-        </view>
-    </view> -->
     <!-- 选择优惠活动 -->
     <view class="actMain">
         <view class="actSelect">请选择参加的活动:</view>

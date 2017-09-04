@@ -30,7 +30,7 @@
   <scroll-view scroll-y style="width:100%;height:{{mainHieght}}px;">
     <block>
       <block wx:for="{{merchants}}" wx:for-item="i">
-      <navigator url="../menu/menu?id={{i.id}}&name={{i.shopName}}" class="shopCont inner txt" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}">
+      <view class="shopCont inner txt"  bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}">
         <!-- <view> -->
         <!-- <image class="shopleft" mode="widthFix" src="../../images/shopmode.png"></image> -->
         <image class="shopleft" src="{{i.shopImg}}"></image>
@@ -49,7 +49,7 @@
             <text class="km">{{i.distance}}km</text>
           </view>
         </view>
-      </navigator>
+      </view>
       </block>
      </block>
   </scroll-view>

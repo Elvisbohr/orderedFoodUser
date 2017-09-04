@@ -7,7 +7,7 @@
     <view class="orderNum">
       <image class="jv" src="../../images/cha.png"></image>
       <view class="partyuan">
-        23
+        {{detail.order.takeFoodNo}}
       </view>
       <image class="jv" src="../../images/dao.png"></image>
     </view>
@@ -16,7 +16,15 @@
     <!-- 订单状态 -->
     <view class="numType">
       <view class="partType">待接单</view>
-      <view class="partNum">堂食 <text>00桌</text></view>
+      <view class="partNum">{{ordertype}} <text wx:if="{{detail.order.tableNum}}">{{detail.order.tableNum}}号桌</text></view>
+    </view>
+  </view>
+  <!-- 订单号 -->
+  <view class="partList">
+
+    <view class="partL">
+      <view class="partLi">订单号: </view>
+      <view class=""> {{detail.order.orderNo}}</view>
     </view>
   </view>
   <!-- 取餐时间 -->
@@ -24,14 +32,14 @@
 
     <view class="partL">
       <view class="partLi">取餐时间: </view>
-      <view class=""> 2017-01-01 11:11</view>
+      <view class=""> {{detail.order.takeFoodtime	}}</view>
     </view>
   </view>
   <!-- 取餐地址 -->
   <view class="partList">
     <view class="partL">
       <view class="partLi">取餐地址: </view>
-      <view class="partDz"> 太原市清控创新基地D座3层0310室太原市清控创新基地D座3层0310室太原市清控创新基地D座3层0310室</view>
+      <view class="partDz"> {{detail.shop.address}}{{detail.shop.detailedAddress}}</view>
     </view>
     <!-- <image class="partR" mode="widthFix" src="../../images/rjt.png"></image> -->
   </view>
@@ -39,38 +47,32 @@
   <view class="partList" bindtap="call">
     <view class="partL">
       <view class="partLi">联系商家: </view>
-      <view class=""> 130999999999</view>
+      <view class=""> {{detail.shop.telphone}}</view>
     </view>
     <image class="partR" mode="widthFix" src="../../images/rjt.png"></image>
   </view>
   <!-- 菜品详情 -->
   <!--店铺名-->
   <view class="settleHead">
-    凯宾斯基
+    {{detail.order.shopName}}
   </view>
   <!--店铺名End-->
   <!--已选菜品-->
   <view class="foodCont {{upmore?'':'on'}}">
-    <block>
+    <block  wx:for="{{detail.order.goods}}">
       <view class="foodList">
-        <view class="foodname">麻婆豆腐1</view>
-        <view class="foodbz"></view>
-        <view class="foodpart">X1</view>
-        <view class="foodmoney">¥12</view>
-      </view>
-      <view class="foodList">
-        <view class="foodname">麻婆豆腐2</view>
-        <view class="foodbz"></view>
-        <view class="foodpart">X1</view>
-        <view class="foodmoney">¥12</view>
-      </view>
-      <view class="foodList">
-        <view class="foodname">麻婆豆腐3</view>
-        <view class="foodbz"></view>
-        <view class="foodpart">X1</view>
-        <view class="foodmoney">¥12</view>
-      </view>
+        <view class="foodname">{{item.goodsName}}</view>
+        <view class="foodbz">({{item.goodsSpecificationName}})({{item.goodsFlavorName}})</view>
+        <view class="foodpart">X{{item.num}}</view>
+        <view class="foodmoney">¥{{item.price}}</view>
+      </view>     
     </block>
+     <view class="foodList"  wx:if="{{detail.order.boxesAmount}}">
+        <view class="foodname">餐盒费</view>
+        <view class="foodbz"></view>
+        <view class="foodpart"></view>
+        <view class="foodmoney">¥{{detail.order.boxesAmount}}</view>
+      </view>
   </view>
   <!--已选菜品End-->
   <!--优惠活动-->
