@@ -1,9 +1,9 @@
 <!--pages/collect/collect.wxml-->
 <view class="pages">
    <view wx:for="{{collect}}" wx:key="{{index}}" class="collect">
-    <view url="../menu/menu?id={{i.shopId}}" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}" >
+    <view url="../menu/menu?id={{i.shopId}}" class="shopCont inner txt"  bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" bindtap="shopnav" data-id="{{item.shopId}}" data-name="{{item.shopName}}" data-index="{{index}}" style="{{item.txtStyle}}" >
       <!-- <view> -->
-        <image class="shopleft" src="{{item.shopImg}}"></image>
+        <image class="shopleft" src="{{appImg}}{{item.shopImg}}"></image>
       <!-- </view> -->
       <view class="shopRight">
         <view class="shopname">{{item.shopName}}</view>
@@ -14,15 +14,16 @@
           <view class="select onMinus" wx:if="{{item.moneyOff == 1}}">减</view>
           <view class="select onDiscount" wx:if="{{item.discount == 1}}">折</view>
         </view>
-        <view class="shopsite">
-          <text>{{item.address}}{{item.detailedAddress}}</text>
-          <text class="km">{{item.distance}}km</text>
+        <view class="shopsite flex vc hb">
+           <!-- <text>{{item.address}}{{item.detailedAddress}}</text> 详细地址 -->
+          <view class='Itemsaddres'>{{item.address}}</view>
+          <view class="km">{{item.distance}}</view>
         </view>
       </view>
     </view>
     <view data-index="{{index}}" bindtap="delItem" class="inner del">删除</view>
   </view> 
-  <view class="none" hidden="true">
+  <view class="none" wx:if="{{!collect.length}}">
     <image class="nsc" mode="widthFix" src="../../images/sc.png"></image>
     <view class="ntit">收藏夹里都是空空哒!</view>
     <view class="ntit">点击店铺右上角红心收藏</view>

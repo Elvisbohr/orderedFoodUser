@@ -2,7 +2,7 @@
 <view class="pages">
   <!-- 头部 -->
   <view class="memberHead flex vc hc">
-    <image class="memberBj" src="../../images/hy/hybj.png"></image>
+    <image class="memberBj" src="../../images/hy/hybj1.png"></image>
     <view class="mHcont flex ">
       <view class="mHcL vc hc">
         <view class="urlImg">
@@ -12,7 +12,7 @@
 
       </view>
       <view class="mHcR vc ha hh">
-        <view class="hyjf">会员积分: <text></text></view>
+        <view class="hyjf">会员积分: <text> 9999</text></view>
       </view>
     </view>
   </view>
@@ -50,7 +50,7 @@
   </view>
   <view class="growth">
     <view class="jfHead">
-      如何获得成长值
+      成长值
     </view>
     <scroll-view  class="growth1" scroll-y>
       <view class="growthList flex hb">

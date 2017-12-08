@@ -4,8 +4,8 @@
   <view class="navHead">
     <!--选择城市-->
     <view class="city" bindtap="city">
+      <image class="arrowsDown" mode="widthFix" src="../../images/dw.png"></image>
       <text>{{city}}</text>
-      <image class="arrowsDown" mode="widthFix" src="../../images/arrowsDown.png"></image>
     </view>
     <!--选择城市End-->
     <!--搜索栏-->
@@ -13,6 +13,7 @@
       <icon size="12" type="search" bindtap="tapSearch" />
       <input value="{{searchTerm}}" placeholder="请输入搜索地址或店铺名称" bindconfirm="tapSearch" bindinput="blurInput" bindblur="tapSearch" />
     </view>
+    <image class='sweep' bindtap="sweep" src='../../images/sweep.png'></image>
     <!--搜索栏End-->
   </view>
   <!--头部导航End-->
@@ -20,20 +21,20 @@
   <swiper class="banner" autoplay="{{autoplay}}">
     <block wx:for="{{bannerUrls}}">
       <swiper-item>
-        <image src="{{item}}" class="slide-image" />
+        <image src="{{appImg}}{{item}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
   <!--轮播图End-->
   <!--店铺展示-->
 
-  <scroll-view scroll-y style="width:100%;height:{{mainHieght}}px;">
+  <scroll-view scroll-y bindscrolltolower="loadMore" style="width:100%;height:{{mainHieght}}px;">
     <block>
       <block wx:for="{{merchants}}" wx:for-item="i">
       <view class="shopCont inner txt"  bindtap="shopnav" data-index="{{index}}" style="{{item.txtStyle}}">
         <!-- <view> -->
-        <!-- <image class="shopleft" mode="widthFix" src="../../images/shopmode.png"></image> -->
-        <image class="shopleft" src="{{i.shopImg}}"></image>
+         <image wx:if="{{i.shopImg == '' ||i.shopImg == null}}" class="shopleft" src="../../images/shopmode.png"></image> 
+        <image wx:else class="shopleft" src="{{appImg}}{{i.shopImg}}"></image>
         <!-- </view> -->
         <view class="shopRight">
           <view class="shopname">{{i.shopName}}</view>
@@ -44,14 +45,16 @@
             <view class="select onMinus" wx:if="{{i.moneyOff == 1}}">减</view>
             <view class="select onDiscount" wx:if="{{i.discount == 1}}" >折</view>
           </view>
-          <view class="shopsite">
-            <text>{{i.detailedAddress}}</text>
-            <text class="km">{{i.distance}}km</text>
+          <view class="shopsite flex vc hb">
+            <view class='Itemsaddres'>{{i.address}}</view>
+            <!-- <text class="km">{{i.distance}}km</text> -->
+            <view class="km">{{i.distance}}</view>
           </view>
         </view>
       </view>
       </block>
      </block>
+     <view class='loadMore' bindtap='loadMore'>{{moreTit}}</view>
   </scroll-view>
  
   <!--店铺展示End-->

@@ -24,19 +24,19 @@
  display: inline-flex;
 }
 .mHcL .urlImg{
-  width: 88rpx;
-  height: 88rpx;
-  border-radius: 44rpx;
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 46rpx;
   position: relative;
 }
 .mHcL .urlImg .tx{
   width: 100%;
   height: 100%;
-  border-radius: 44rpx
+  border-radius: 46rpx
 }
 .mHcL .urlImg .vip{
   position: absolute;
-  bottom: 0;
+  bottom: -6rpx;
   right: -10rpx;
   width: 30rpx;
   height: 30rpx;
@@ -52,12 +52,13 @@
   color: #fff;
 }
 .lsqx{
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #fff;
 }
 /* 活动列表 */
 .hdMain{
-  padding: 20rpx 30rpx;
+  padding: 20rpx;
+  padding-top: 0; 
 }
 .hdList{
   width: 100%;
@@ -67,7 +68,7 @@
 .hdHead{
   color: #9d9d9d;
   font-size: 24rpx;
-  padding: 20rpx 0;
+  padding: 15rpx 0 4rpx 0;
 }
 .hdListImg{
   width: 100%;

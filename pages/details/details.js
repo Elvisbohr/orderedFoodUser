@@ -11,34 +11,9 @@ Page({
 
 
   onLoad: function (options) {
-    // var that = this;
-    // // var data = {};
-    // // data.openid = app.globalData.openId;
-    // // that.mine(data);
-    // // var userInfo = that.data.userInfo;  //获取从接口中获取到的值
-    // var userInfo = app.globalData.personal;
-    // console.log(userInfo)
-    // if (userInfo.headImg == ''){   //如果为空的话用默认微信头像
-    //   console.log('用户未修改头像')
-    //   wx.getStorage({
-    //     key: 'userInfo',
-    //     success: function (res) {
-    //       var stotageInfo = res.data;
-    //       userInfo.headImg = stotageInfo.avatarUrl;
-    //       userInfo.name = stotageInfo.nickName;
-    //       // console.log(userInfo)
-    //       that.setData({
-    //         userInfo: userInfo,
-    //       })         
-    //     }
-    //   });
-    // }else{
-    //   console.log('用户修改过头像')  //如果修改过请求接口
-    //   that.setData({
-    //     userInfo: userInfo,
-        
-    //   })
-    // }
+    this.setData({
+      appImg: app.globalData.adminAddressImg,
+    })
   },
   onShow:function(){
       var that = this;
@@ -60,11 +35,21 @@ Page({
           });
       } else {
           console.log('用户修改过头像')  //如果修改过请求接口
+          userInfo.headImg = userInfo.headImg
           that.setData({
               userInfo: userInfo,
-
           })
+      };
+      console.log(userInfo)
+      if (userInfo.birthday == null){
+        userInfo.birthday = "请设置您的生日";        
       }
+      if(userInfo.phone == null){
+        userInfo.phone = "请设置您的手机号";
+      }
+      that.setData({
+        userInfo: userInfo,
+      })
   },
   
   UpuserImg1: function () {   // 点击上传头像
@@ -104,8 +89,8 @@ Page({
         });
         //  上传到服务器端
         wx.uploadFile({
-          url: 'https://ad.kulizhi.com/ydc/api/upload',
-          // url: app.globalData.serverAddress + '/picupload',
+          // url: 'https://ad.kulizhi.com/ydc/api/upload',
+          url: app.globalData.adminAddress + '/picupload',
           filePath: res.tempFilePaths[0],
           name: 'upload',
           formData: {
@@ -114,20 +99,46 @@ Page({
           success: function (res) {
             console.log('res1')
             console.log(JSON.parse(res.data))
-            // var files = JSON.parse(res.data);
-            // var shopInfo = that.data.shopInfo; //先获取data里的shopinfo(不能直接给数组里面的赋值)
-            // shopInfo.imgurl = files.data[0];  //给shopinfo里的imgurl赋值
-            // console.log(files.data[0])
-            // that.setData({                  //修改data里的值
-            //   imgurl: files.data[0],
-            //   shopInfo: shopInfo
-            // });
-            // // 把返回的长传的全局里
-            // app.globalData.shopInfo.imgurl = files.data[0];
+            var files = JSON.parse(res.data);
+            var userInfo = that.data.userInfo; //先获取data里的userInfo(不能直接给数组里面的赋值)
+            userInfo.headImg = files.data[0];  //给shopinfo里的imgurl赋值
+            console.log(files.data[0])
+
+            that.setData({                  //修改data里的值
+              userInfo: userInfo
+            });
+            // 调取修改个人信息接口
+            var imgData = {};
+            imgData.id = userInfo.id;
+            imgData.updateType = 'headImg' ; 
+            imgData.updateContent = userInfo.headImg; 
+            that.updata(imgData);
           }
         })
 
       },
+    })
+  },
+  updata: function (data) {
+    var that = this;
+    wx.request({
+      url: app.globalData.adminAddress + '/applet_customer/updateCustomerInfo',
+      data: data,
+      method: "POST",
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      success: function (res) {
+        wx.hideLoading();
+        console.log(res)
+        var userInfo = that.data.userInfo; //先获取data里的userInfo(不能直接给数组里面的赋值)
+        userInfo.headImg = that.data.appImg + data.updateContent
+        that.setData({
+          userInfo: userInfo,
+        })
+        app.globalData.personal = data.userInfo
+      },
+      fail: function () {
+        wx.showLoading('请求数据失败');
+      }
     })
   },
   // 获取用户信息接口
@@ -167,6 +178,24 @@ Page({
   //     }
   //   })
   // }
-
+  // 转发
+  onShareAppMessage: function (res) {
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '爱点自助点餐',
+      path: 'pages/details/details',
+      imageUrl: "/images/message.png",
+      success: function (res) {
+        // 转发成功
+        // console.log(res)
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  }
   
 })

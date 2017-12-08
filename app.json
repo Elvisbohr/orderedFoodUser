@@ -1,5 +1,5 @@
 {
-  "pages":["pages/orderparticulars/orderparticulars",
+  "pages":[
     "pages/index/index",
     "pages/mine/mine",
     "pages/membercenter/membercenter",
@@ -9,14 +9,17 @@
     "pages/collect/collect",
     "pages/orderform/orderform",
     "pages/coupon/coupon",
-    
+    "pages/orderparticulars/orderparticulars",
     "pages/details/details",
     "pages/userName/userName",
     "pages/userBirthday/userBirthday",
     "pages/userPhone/userPhone",
     "pages/switchcity/switchcity",
     "pages/helpcentre/helpcentre",
+    "pages/agreementList/agreementList",
     "pages/agreement/agreement",
+    "pages/merchantServiceAgreement/merchantServiceAgreement",
+    "pages/legalNotices/legalNotices",
     "pages/logs/logs"
   ],
   "window":{
@@ -27,7 +30,7 @@
   },
   "tabBar": {
     "color": "#666666",
-    "selectedColor": "#11cd6e",
+    "selectedColor": "#666666",
     "borderStyle": "white",
     "list": [
       {

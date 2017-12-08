@@ -5,17 +5,17 @@
       <view class="helpHead">{{item.helphead}}</view>
       <view class="helpList">
         <block wx:for="{{item.helpxz}}">
-          <view class="">{{item}}</view>
+          <view class="helptit">{{item}}</view>
         </block>
       </view>
       <view class="helpList">
         <block wx:for="{{item.helphow}}">
-          <view class="">{{item}}</view>
+          <view class="helptit">{{item}}</view>
         </block>
       </view>
       <view class="helpList">
         <block wx:for="{{item.helpwt}}">
-          <view class="">{{item}}</view>
+          <view class="helptit">{{item}}</view>
         </block>
       </view>
     </block>

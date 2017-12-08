@@ -20,10 +20,13 @@ page,.pages{
 }
 /*已选菜品*/
 .foodCont{
-  height: 180rpx;
   overflow: hidden;
 }
+.foodCont.off{
+  max-height: 180rpx;
+}
 .foodCont.on{
+  max-height: auto !important;
   height: auto;
 }
 .foodList{
@@ -44,18 +47,18 @@ page,.pages{
     text-overflow: clip;
 }
 .foodbz{
-    width: 55%;
+    width: 47%;
     /* text-align: center; */
     flex-shrink: 0;
 
 }
 .foodpart{
-    width: 10%;
+    width: 11%;
     text-align: center;
     flex-shrink: 0;
 }
 .foodmoney{
-    width: 10%;
+    width: 17%;
     text-align: center;
     flex-shrink: 0;
 }
@@ -67,7 +70,7 @@ page,.pages{
   align-items: center;
   position: relative;
   background: #fff;
-  padding-top: 36rpx;
+  /* padding-top: 36rpx; */
 }
 
 .totalL{
@@ -81,18 +84,25 @@ page,.pages{
   font-size: 24rpx;
   color: #454545;
   height: 55rpx;
-  width: 90%;
+  width: 86%;
   padding-left: 30rpx;
   border-bottom: 1px solid #f1f1f1;
 }
 .actr{
-  width: 30rpx;
+  width: 50rpx;
   position: absolute;
   right: 10rpx;
-  bottom: -10rpx
+  bottom: -10rpx;
 }
-.actr.on{
-  transform:rotate(180deg)
+
+/* .actr.on{
+  transform:rotate(180deg);
+  -webkit-animation: start 1.5s infinite ease-in-out;
+	animation: start 1.5s infinite ease-in-out;
+} */
+.actr.off{
+  -webkit-animation: offend 1.5s infinite ease-in-out;
+	animation: offend 1.5s infinite ease-in-out;
 }
 .total{
   height: 80rpx;
@@ -106,52 +116,30 @@ page,.pages{
 }
 .actMain{
   background: #fff;
-  padding: 30rpx 0 15rpx;
+  padding: 15rpx 0 15rpx;
 }
-.actList{
-  display: -webkit-flex;
-  display: flex;
+.actList{ 
   align-items: center;
-  justify-content: space-between;
-  padding: 0 38rpx 15rpx;
+  height: 90rpx;
   font-size: 28rpx;
+  padding: 0 30rpx;
+  border-bottom: 1px solid #f1f1f1;
 }
-.actlistL text{
-  border-radius: 3px;
-  color: #fff;
-  width: 35rpx;
-  height: 35rpx;
-  line-height: 35rpx;
-  display: inline-block;
-  text-align: center;
-  margin-right: 15rpx;
-}
-.actlistL .actZ{
-  background: #6dd36b;
-}
-.actlistL .actD{
-  background: #ff8688;
-}
-.actlistL .actJ{
-  background: #fbaf33;
-}
-.actlistR{
-  color: #d93035;
-}
+
 .actSelect{
-    width: 100%;
-    padding: 0 38rpx 15rpx;
-    font-size: 24rpx;
+    /* width: 100%; */
     box-sizing: border-box;
     color: #808080;
 }
 .actSelect .actSelectPicker{
     font-size: 28rpx;
     width: 100%;
-    text-align: center;
+    text-align: right;
     color: #5a5a5a;
 }
-
+.minjt{
+  width: 26rpx;
+}
 /*就餐方式*/
 .waylist {
   background: #fff;
@@ -303,4 +291,8 @@ page,.pages{
 .cart-tab-item {
   width: 375rpx;
   color: #fff;
+}
+.formbtn{
+ position: absolute;
+ right: 0;
 }

@@ -10,48 +10,30 @@ var initdata = function (that) {
 Page({
   data: {
     delBtnWidth: 180,//删除按钮宽度单位（rpx） 
-    // list: [
-    //   {
-    //     txtStyle: "",
-    //     jl: "1",
-    //     name: "凯宾斯基",
-    //     sect:'营业中',
-    //     forms:'南中环清空基地',
-    //   },
-    //   {
-    //     txtStyle: "",
-    //     jl: "123",
-    //     name: "万达文华",
-    //     sect: '营业中',
-    //     forms: '南中环清空基地',
-    //   },
-    //   {
-    //     txtStyle: "",
-    //     icon: "12",
-    //     name: "如家汉庭",
-    //     sect: '营业中',
-    //     forms: '南中环清空基地',
-    //   },
-    //   {
-    //     txtStyle: "",
-    //     jl: "32",
-    //     name: "指尖快递4",
-    //     sect: '营业中',
-    //     forms: '南中环清空基地',
-    //   },
-    // ]
   },
 
   
   onLoad: function (options) {
+    var that = this;   
+    that.initEleWidth();
+    that.setData({
+      appImg: app.globalData.adminAddressImg,
+    })
+  },
+  onShow: function (){
     var that = this,
     data = {};
     data.openid = app.globalData.openId
     data.lat = app.globalData.lat
     data.lon = app.globalData.lon
     console.log(data)
-    this.initEleWidth();
+    // this.initEleWidth();
     this.collectShop(data);
+    // 清空total(本地购物车缓存)的数据
+    wx.setStorage({
+      key: 'total',
+      data: { count: 0, price: 0, list: [] },
+    })
   },
   touchS: function (e) {
     if (e.touches.length == 1) {
@@ -166,12 +148,15 @@ Page({
 
   },
   //点击跳转商铺
-  shopnav:function(){
+  shopnav:function(e){
     var txtStyle = "";
+    console.log(e)
+    var id = e.currentTarget.dataset.id;
+    var name = e.currentTarget.dataset.name;
     wx.navigateTo({
-      url: '../menu/menu',
+      url: '../menu/menu?id='+id+'&name='+name,
       success: function (res) {
-        
+
       }
     })
   },
@@ -215,5 +200,43 @@ Page({
               wx.showLoading('请求数据失败');
           }
       })
-  }
+  },
+  // 转发
+  onShareAppMessage: function (res) {
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '爱点自助点餐',
+      path: 'pages/index/index',
+      imageUrl: "/images/message.png",
+      success: function (res) {
+        // 转发成功
+        // console.log(res)
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
+  // 转发
+  onShareAppMessage: function (res) {
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '爱点自助点餐',
+      path: 'pages/index/index',
+      imageUrl: "/images/message.png",
+      success: function (res) {
+        // 转发成功
+        // console.log(res)
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
 })

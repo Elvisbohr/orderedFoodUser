@@ -3,7 +3,7 @@ Page({
   data: {
     helpcenter:[
       {
-        helphead:'帮助中心',
+        // helphead:'帮助中心',
         helpxz:[
           '订餐须知',
           '以下条款可能不定期修改，请以页面公示为准：',
@@ -43,6 +43,26 @@ Page({
   onLoad: function (options) {
   
   },
-
+  /**
+  * 用户点击右上角分享
+  */
+  onShareAppMessage: function (res) {
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '爱点自助点餐',
+      path: 'pages/index/index',
+      imageUrl: "/images/message.png",
+      success: function (res) {
+        // 转发成功
+        // console.log(res)
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  }
   
 })

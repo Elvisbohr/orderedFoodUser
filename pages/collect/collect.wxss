@@ -19,8 +19,11 @@ view{
 .shopleft{
   width: 146rpx;
   height: 146rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
 }
 .shopRight{
+  width: 70%;
   margin-left: 35rpx;
 }
 .shopsite{
@@ -35,7 +38,7 @@ view{
 }
 .select{
   color: #fff;
-  padding: 5rpx 10rpx;
+  padding: 2rpx 10rpx;
   border-radius: 8rpx;
   margin-right:16rpx;
 }
@@ -66,8 +69,9 @@ view{
 .collect{  
     position: relative;  
     border-top: 2rpx solid #eee;  
-    height: 190rpx;
-    margin-top: 20rpx;
+    height: 170rpx;
+    margin-top: 14rpx;
+    box-sizing: border-box;
     overflow: hidden;  
 }
 .inner{  
@@ -113,4 +117,10 @@ view{
 }
 .km{
   padding-left: 16rpx; 
+}
+.Itemsaddres{
+  width: 75%;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }

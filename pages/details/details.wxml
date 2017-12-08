@@ -3,7 +3,8 @@
   <view class="List bm">
     <view class="listL">头像</view>
     <view class="listR">
-      <image class="userImg" bindtap="UpuserImg" src="{{userInfo.headImg}}"></image>
+       <image wx:if="{{userInfo.headImg}}" class="userImg 1" bindtap="UpuserImg" src="{{userInfo.headImg}}"></image> 
+       <image wx:if="{{!userInfo.headImg}}" class="userImg 2" bindtap="UpuserImg" src="../../images/headImg.png"></image> 
       <image class="rjt" mode="widthFix" src="../../images/rjt.png"></image>
     </view>
   </view>

@@ -28,9 +28,9 @@ page,.pages{
   border-radius:80rpx; 
 }
 .mineTx image{
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 70rpx;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 75rpx;
   position: relative;
   z-index: 9;
 }
@@ -68,7 +68,7 @@ page,.pages{
   align-items: center;
 }
 .mineMsgImg{
-  width: 54rpx;
+  width: 46rpx;
   /* height: 55rpx; */
   display: -webkit-flex;
   display: flex; 
@@ -78,6 +78,7 @@ page,.pages{
 }
 .mineMsgTxt{
   color: #666666;
+  font-size: 28rpx;
 }
 .mineRimg{
   width: 26rpx;

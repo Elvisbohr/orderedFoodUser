@@ -3,14 +3,16 @@
   <block wx:if="{{myCoupons.length > 0}}">
   <block wx:for="{{myCoupons}}">
   <view class="couponMain">
-    <view class="couList flex hb vc">
+    <view class="couList flex hb vc" bindtap="shopnav" data-index="{{index}}">
       <image class="coupnBj" src="../../images/cardBj.png"></image>
       <view class="couL">
-        <image class="coulImg" src="../../images/shopmode.png"></image>
+        <!-- <image class="coulImg" src="../../images/shopmode.png"></image> -->
+        <image class="coulImg" src="{{appImg}}{{item.shopImg}}"></image>
         <view class="couShop">
           <view class="couName">{{item.shopName}}</view>
           <view class="couTime">有效期至: <text>{{item.expirationEndTime}}</text></view>
-          <view class="couUser">仅限 <text>{{item.customerName}}</text>使用</view>
+          <!-- <view class="couUser">仅限 <text>{{item.customerName}}</text>使用</view> -->
+          <view class="couUser">仅限 <text>本人</text>使用</view>
         </view>
       </view>
       <view class="couR">
